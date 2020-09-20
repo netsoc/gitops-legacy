@@ -21,4 +21,6 @@ spec:
       tls:
       - hosts: [podinfo.ops.netsoc.ga]
         secretName: tls-ops
-      hosts: ['podinfo.ops.netsoc.ga']
+      hosts: [podinfo.ops.netsoc.ga]
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure

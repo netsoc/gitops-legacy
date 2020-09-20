@@ -19,12 +19,11 @@ spec:
     ingress:
       enabled: true
       tls:
-        - hosts:
-            - '*.ops.netsoc.ga'
-            - 'netsoc.ga'
-            - '*.netsoc.ga'
+        - hosts: [dashboard.ops.netsoc.ga]
           secretName: tls-ops
       hosts: [dashboard.ops.netsoc.ga]
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
