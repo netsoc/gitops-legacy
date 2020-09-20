@@ -19,9 +19,6 @@ spec:
     ingress:
       enabled: true
       tls:
-      - hosts:
-        - '*.ops.netsoc.ga'
-        - 'netsoc.ga'
-        - '*.netsoc.ga'
+      - hosts: [podinfo.ops.netsoc.ga]
         secretName: tls-ops
       hosts: ['podinfo.ops.netsoc.ga']
