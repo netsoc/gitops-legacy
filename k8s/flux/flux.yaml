@@ -18,6 +18,8 @@ spec:
       url: "git@github.com:netsoc/gitops.git"
       branch: master
       path: k8s
+      user: 'NetsocBot'
+      email: 'internet@csc.tcd.ie'
       signingKey: DB2E28B13D53C8DD62FE560B408F6E592A12DF74
     syncGarbageCollection:
       enabled: true
