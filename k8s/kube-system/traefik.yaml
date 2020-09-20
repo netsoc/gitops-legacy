@@ -36,11 +36,13 @@ spec:
       web:
       websecure:
       http:
+        protocol: TCP
         port: 80
         expose: true
         exposedPort: 80
         redirectTo: https
       https:
+        protocol: TCP
         port: 443
         expose: true
         exposedPort: 443
