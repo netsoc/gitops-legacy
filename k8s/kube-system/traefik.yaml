@@ -19,7 +19,7 @@ spec:
   values:
     image:
       name: traefik
-      tag: v2.2.10
+      tag: v2.2.11
     deployment:
       replicas: 1
     logs:
@@ -33,8 +33,8 @@ spec:
       kubernetes:
         enabled: true
     ports:
-      web: null
-      websecure: null
+      web:
+      websecure:
       http:
         port: 80
         expose: true
@@ -69,10 +69,10 @@ spec:
   tls:
     secretName: tls-ops
     domains:
-      - main: '*.ops.netsoc.ga'
-        sans:
-          - 'netsoc.ga'
-          - '*.netsoc.ga'
+    - main: '*.ops.netsoc.ga'
+      sans:
+      - 'netsoc.ga'
+      - '*.netsoc.ga'
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
