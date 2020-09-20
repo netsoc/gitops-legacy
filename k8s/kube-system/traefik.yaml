@@ -34,14 +34,12 @@ spec:
         enabled: true
     ports:
       web:
-      websecure:
-      http:
         protocol: TCP
         port: 80
         expose: true
         exposedPort: 80
         redirectTo: https
-      https:
+      websecure:
         protocol: TCP
         port: 443
         expose: true
@@ -59,7 +57,7 @@ metadata:
   name: traefik-dashboard
   namespace: kube-system
 spec:
-  entryPoints: [https]
+  entryPoints: [websecure]
   routes:
   - match: Host(`traefik.ops.netsoc.ga`)
     kind: Rule
