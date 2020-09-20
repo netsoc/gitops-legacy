@@ -4,14 +4,14 @@ metadata:
     name: traefik-ops-users
     namespace: kube-system
 data:
-    users: ENC[AES256_GCM,data:K+ZwlOTQ9OeWT5L9RqkAd85XEhcBeiaB2LA/vghy8oH/W/BiuYsta4e+gDsytqAfqeZ6l9WjmFM=,iv:Uz+zHVTtmCllOvGlwdDM/on9kMhDQFWKZT6VuDdqk80=,tag:KNQcvaPX3Jy0M7mgVSgIRw==,type:str]
+    users: ENC[AES256_GCM,data:4rzB9m/3WlC/ssppzGwMzHVeSSapKCthp7flCI4P81UU8RfZbLkXmcjaUNSPFuyYXPgjlDHET8sggRBYw+GD1yMa6OxFrd7YuFwKhty3o94UROJs1WppvSNl8E3ic9d4Ls6YvSMP8yIe5O3/QJslg5TtuzFHS/Ns,iv:2DaecPxO82YJX+R3BilW5PDBh8nX2VAZAwA+UfSRd0Q=,tag:eZ+Uc4u6/ZilbAsn0kTxFA==,type:str]
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
-    lastmodified: '2020-09-20T21:28:21Z'
-    mac: ENC[AES256_GCM,data:FfkmdE97bQX43p2R9pl0X3hECf2ZZbu/CqqPyL3WrM/VODInqrFrIlBzGuNomf93DMClhumloNaGy2WtCEZJ7bblKsPFkIQ8cZZC8T5epzvr5e6np8D6t3Om0snjcCxFrzP7a+JxIYEEVzYQXAS/0+YQm3CZ/L8HRAg6Kv6rQZ4=,iv:f0YH7fPQbh9NXr+2ZmKkJk/DAklOSKyjJdM+CFp10/c=,tag:sNaQtKFIHbmUXUVxmE2+bw==,type:str]
+    lastmodified: '2020-09-20T23:44:09Z'
+    mac: ENC[AES256_GCM,data:tEuO5mDCYUhTwDUYEHv2UTA8rQCXwL4Vs6hmyOJw0TMaAULwivd+bLqpA1DJ1kgKvacewpSh+uAGnqqdzqW+Ics3dQCYQiQoZ3xcCtvpoPhQJ+VFdFle/euJ6Guqv4gV4jAO+iVO6PxjfeJu5lsZ6/PFnI4KvgmjM4rt7Hiu7xU=,iv:aA5/HFHAy6gYXlnj1QYAdSnIs6ki3Jh3ThqbfoVqlEI=,tag:DSHyiyFpvaGqzc8jfschRQ==,type:str]
     pgp:
     -   created_at: '2020-09-20T21:28:21Z'
         enc: |
