@@ -20,10 +20,10 @@ spec:
       enabled: true
       tls:
         - hosts:
-          - '*.ops.netsoc.ga'
-          - 'netsoc.ga'
-          - '*.netsoc.ga'
-        secretName: tls-ops
+            - '*.ops.netsoc.ga'
+            - 'netsoc.ga'
+            - '*.netsoc.ga'
+          secretName: tls-ops
       hosts: [dashboard.ops.netsoc.ga]
 ---
 apiVersion: rbac.authorization.k8s.io/v1

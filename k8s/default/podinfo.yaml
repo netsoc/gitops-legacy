@@ -19,8 +19,8 @@ spec:
       enabled: true
       tls:
         - hosts:
-          - '*.ops.netsoc.ga'
-          - 'netsoc.ga'
-          - '*.netsoc.ga'
+            - '*.ops.netsoc.ga'
+            - 'netsoc.ga'
+            - '*.netsoc.ga'
           secretName: tls-ops
       hosts: ['podinfo.ops.netsoc.ga']
