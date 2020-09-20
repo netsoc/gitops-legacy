@@ -24,7 +24,7 @@ spec:
       hosts: [dashboard.ops.netsoc.ga]
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.middlewares: auth@kubernetescrd
+        traefik.ingress.kubernetes.io/router.middlewares: kube-system-auth@kubernetescrd
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
