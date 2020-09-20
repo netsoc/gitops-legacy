@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: hostdev-device-plugin
+  namespace: kube-system
+  annotations:
+    fluxcd.io/automated: 'true'
+spec:
+  selector:
+    matchLabels:
+      name: hostdev-device-plugin
+  template:
+    metadata:
+      labels:
+        name: hostdev-device-plugin
+    spec:
+      tolerations:
+      - key: CriticalAddonsOnly
+        operator: Exists
+      priorityClassName: system-node-critical
+      hostNetwork: true
+      containers:
+      - name: hostdev
+        image: ghcr.io/devplayer0/k8s-hostdev-plugin:2f8657bb3519d277469ef8b7e35611119b593c37
+          # 110, one for every pod (potentially!)
+        args: ['--devs', '/dev/kvm:rw:110']
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: device-plugin
+          mountPath: /var/lib/kubelet/device-plugins
+        - name: dev
+          mountPath: /dev
+      volumes:
+      - name: device-plugin
+        hostPath:
+          path: /var/lib/kubelet/device-plugins
+      - name: dev
+        hostPath:
+          path: /dev

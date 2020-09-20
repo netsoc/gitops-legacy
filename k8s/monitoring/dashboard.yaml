@@ -1,0 +1,41 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: dashboard
+  namespace: monitoring
+spec:
+  releaseName: dashboard
+  helmVersion: v3
+  chart:
+    repository: https://kubernetes.github.io/dashboard/
+    name: kubernetes-dashboard
+    version: 2.3.0
+  values:
+    metricsScraper:
+      enabled: true
+    protocolHttp: true
+    service:
+      externalPort: 80
+    ingress:
+      enabled: true
+      tls:
+        - hosts:
+          - '*.ops.netsoc.ga'
+          - 'netsoc.ga'
+          - '*.netsoc.ga'
+        secretName: tls-ops
+      hosts: [dashboard.ops.netsoc.ga]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kubernetes-dashboard
+  namespace: monitoring
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: dashboard-kubernetes-dashboard
+    namespace: monitoring

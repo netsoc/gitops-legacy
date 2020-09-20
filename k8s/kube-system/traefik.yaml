@@ -1,0 +1,94 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: kube-system
+  annotations:
+    fluxcd.io/automated: 'true'
+    repository.fluxcd.io/traefik: image.name
+    tag.fluxcd.io/traefik: image.tag
+    filter.fluxcd.io/traefik: semver:~2.2
+spec:
+  releaseName: traefik
+  helmVersion: v3
+  chart:
+    repository: https://containous.github.io/traefik-helm-chart
+    name: traefik
+    version: 9.1.0
+  values:
+    image:
+      name: traefik
+      tag: v2.2.10
+    deployment:
+      replicas: 1
+    logs:
+      general:
+        level: DEBUG
+      access:
+        enabled: true
+    providers:
+      kubernetesCRD:
+        enabled: true
+      kubernetes:
+        enabled: true
+    ports:
+      web: null
+      websecure: null
+      http:
+        port: 80
+        expose: true
+        exposedPort: 80
+        redirectTo: https
+      https:
+        port: 443
+        expose: true
+        exposedPort: 443
+    service:
+      enabled: true
+      type: LoadBalancer
+    ingressRoute:
+      dashboard:
+        enabled: false
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard
+  namespace: kube-system
+spec:
+  entryPoints: [https]
+  routes:
+  - match: Host(`traefik.ops.netsoc.ga`)
+    kind: Rule
+    services:
+    - name: api@internal
+      kind: TraefikService
+    middlewares:
+    - name: auth
+  tls:
+    secretName: tls-ops
+    domains:
+      - main: '*.ops.netsoc.ga'
+        sans:
+          - 'netsoc.ga'
+          - '*.netsoc.ga'
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: auth
+  namespace: kube-system
+spec:
+  basicAuth:
+    secret: traefik-ops-users
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: dashboard-redirect
+  namespace: kube-system
+spec:
+  redirectRegex:
+    regex: '^https://traefik.ops.netsoc.ga/(.*)'
+    replacement: 'https://traefik.ops.netsoc.ga/dashboard/${1}'

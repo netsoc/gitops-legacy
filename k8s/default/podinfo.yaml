@@ -1,0 +1,26 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: podinfo
+  namespace: default
+  annotations:
+    fluxcd.io/automated: 'true'
+spec:
+  chart:
+    repository: https://stefanprodan.github.io/podinfo
+    name: podinfo
+    version: 4.0.6
+  values:
+    image:
+      repository: stefanprodan/podinfo
+      tag: 4.0.6
+    replicaCount: 1
+    ingress:
+      enabled: true
+      tls:
+        - hosts:
+          - '*.ops.netsoc.ga'
+          - 'netsoc.ga'
+          - '*.netsoc.ga'
+          secretName: tls-ops
+      hosts: ['podinfo.ops.netsoc.ga']

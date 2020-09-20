@@ -1,0 +1,55 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+    name: botkube
+    namespace: monitoring
+    annotations:
+        fluxcd.io/automated: "true"
+        filter.fluxcd.io/chart-image: semver:~0.10
+spec:
+    releaseName: botkube
+    helmVersion: v3
+    chart:
+        repository: https://infracloudio.github.io/charts
+        name: botkube
+        version: v0.10.0
+    values:
+        image:
+            repository: infracloudio/botkube
+            tag: v0.10.0
+        config:
+            settings:
+                clustername: k3s
+        communications:
+            slack:
+                enabled: true
+                channel: gitops-test
+                token: ENC[AES256_GCM,data:1yMuPFb0UfEVulASTxL+kSDiyMdJpIJ+L2J+slxon7VFrmwBi7SMtul/DU5q++l1921DmfrQLeKS,iv:+VS6lXn15pttTnbKxTjcRZ+wIYQin0b1n0VFB4fsvJI=,tag:S8GOlqPpoLRlO1hfS2LlyQ==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    lastmodified: '2020-09-20T21:26:56Z'
+    mac: ENC[AES256_GCM,data:PD+ogE1pek6/DI0wRuC331GaVPsXkX8HNGOK19QRJ1TLDdS21MTgVNPA2BCCeH0t/X3nEbmo3ijPXnHZG/FwiaBIg1d7OIvF84gJKwyrGcmG0AJ4Ry+66ZqN8HeegAmTyC4T0eqWkO/hnIN7Sf2q8zT44DA/JaKZ0dDp1MvC4DE=,iv:0Ac2lIQ69yalUPHBRvVxxQw9NKtxZuBrEuPA9Vt7mtg=,tag:UxBGU2BOhFR0o9k4PceP6g==,type:str]
+    pgp:
+    -   created_at: '2020-09-20T21:26:56Z'
+        enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQGMA5AfX+B6AMX7AQv9F/I6Eb+T+H1iJuaI9x0d6QjPLJS9315gghl7aKEMAVMb
+            sjNPMBfT133XvTynyxtSRkILzmGRRpPDs8JtXLDly2+o8YFh47ehMKrSC/jeK4S1
+            Jo8me4RvSMBeh51CYfO3L7a3NNDQKSmLhTn8wynL9grl6cFkAgsBW3BrRRGbMtY6
+            9jxavQ/CYDm9IhckTMjD7hjg4nJeD99rBciERB60oT57oJrlYybGXQrPcvtVrn1x
+            1JZsiAHd6FztwX41VNoKajdKh/vofdN4VO1edS4eAKWpUcupzx3y/hbPDeoV1Qgo
+            lVQmNBl75Cx/w9yTrrcOiYB2P7o96ek3CGyPxCsebHkuMR4nDJ6wnIEFi0u03J/E
+            EV5HiIR8ZbLaetdCH8wVM7uZE95zSn8mFehzwq2r6Itg8SN3Ik+Fld8ENRn9Vphe
+            tjkkdm/Db8Qs/o9V9+IQgH98KRhwa0Xw/dmSfWpx+xIP2rh2qz0WAOsFj198eQeO
+            tAzbLasqYBhpU963fdW90lwBhBIA5ToW/iznsKYOp2kTGugb5PFNNqHE60peMVFb
+            g1ZIyIoGxuzWB7DLoo9et8oEVNm78dlXrmCvwknIgpDWuceiGFWpefM7whgI11GS
+            75M/oSfO9VGnMCdYNg==
+            =3N9f
+            -----END PGP MESSAGE-----
+        fp: DB2E28B13D53C8DD62FE560B408F6E592A12DF74
+    encrypted_regex: ^token$
+    version: 3.6.0

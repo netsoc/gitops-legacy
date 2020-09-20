@@ -1,0 +1,28 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: flux
+  namespace: flux
+  annotations:
+    fluxcd.io/automated: "false"
+spec:
+  releaseName: flux
+  helmVersion: v3
+  chart:
+    repository: https://charts.fluxcd.io/
+    name: flux
+    version: 1.5.0
+  values:
+    additionalArgs: ['--connect=ws://fluxcloud.monitoring']
+    git:
+      url: "git@github.com:netsoc/gitops.git"
+      branch: master
+      path: k8s
+      signingKey: DB2E28B13D53C8DD62FE560B408F6E592A12DF74
+    syncGarbageCollection:
+      enabled: true
+      dry: false
+    gpgKeys:
+      secretName: flux-pgp
+    sops:
+      enabled: true
