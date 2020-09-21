@@ -21,8 +21,10 @@ spec:
       tls:
         - hosts: [dashboard.ops.netsoc.ga]
           secretName: tls-ops
-      hosts: [dashboard.ops.netsoc.ga]
+      hosts:
+        - '*.ops.netsoc.ga'
       annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.middlewares: kube-system-auth@kubernetescrd
 ---
