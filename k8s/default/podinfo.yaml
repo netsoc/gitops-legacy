@@ -18,9 +18,9 @@ spec:
     replicaCount: 1
     ingress:
       enabled: true
+      path: /
       tls:
       - hosts: [podinfo.ops.staging.netsoc.ie]
-        path: /
         secretName: tls-ops
       hosts: [podinfo.ops.staging.netsoc.ie]
       annotations:
