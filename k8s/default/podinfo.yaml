@@ -20,6 +20,7 @@ spec:
       enabled: true
       tls:
       - hosts: [podinfo.ops.staging.netsoc.ie]
+        path: /
         secretName: tls-ops
       hosts: [podinfo.ops.staging.netsoc.ie]
       annotations:
