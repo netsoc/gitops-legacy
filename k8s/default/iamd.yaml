@@ -1,3 +1,4 @@
+---
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
@@ -14,16 +15,16 @@ spec:
   values:
     image:
       repository: ghcr.io/netsoc/iamd
-      tag: 0.1.1
+      tag: 0.1.3
     replicaCount: 1
     ingress:
       enabled: true
       tls:
-        - hosts: [iam.staging.netsoc.ie]
-          secretName: tls-main
+      - hosts: [iam.staging.netsoc.ie]
+        secretName: tls-main
       hosts:
-        - host: iam.staging.netsoc.ie
-          paths: [/]
+      - host: iam.staging.netsoc.ie
+        paths: [/]
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
@@ -44,7 +45,7 @@ spec:
         login_validity: 8760h
         email_validity: 24h
     postgresql:
-        enabled: true
+      enabled: true
   valuesFrom:
-    - secretKeyRef:
-        name: iamd-secrets
+  - secretKeyRef:
+      name: iamd-secrets
