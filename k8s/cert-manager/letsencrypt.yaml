@@ -12,10 +12,10 @@ spec:
       name: letsencrypt-account-key
     solvers:
     - dns01:
-      rfc2136:
-        nameserver: cube.netsoc.ie
-        tsigKeyName: 'staging.netsoc.ie.'
-        tsigAlgorithm: HMACSHA512
-        tsigSecretSecretRef:
-          name: cubedns-tsig
-          key: k8s.key
+        rfc2136:
+          nameserver: cube.netsoc.ie
+          tsigKeyName: 'staging.netsoc.ie.'
+          tsigAlgorithm: HMACSHA512
+          tsigSecretSecretRef:
+            name: cubedns-tsig
+            key: k8s.key
