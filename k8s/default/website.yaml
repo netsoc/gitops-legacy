@@ -1,3 +1,4 @@
+---
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
@@ -13,16 +14,16 @@ spec:
   values:
     image:
       repository: ghcr.io/netsoc/website
-      tag: latest
+      tag: 0eb5c04a7c1e69065c404d11aa825fbb63a8f4ee
     replicaCount: 1
     ingress:
       enabled: true
       tls:
-        - hosts: [www.staging.netsoc.ie]
-          secretName: tls-ops
+      - hosts: [www.staging.netsoc.ie]
+        secretName: tls-ops
       hosts:
-        - host: www.staging.netsoc.ie
-          paths: [/]
+      - host: www.staging.netsoc.ie
+        paths: [/]
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
