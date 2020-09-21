@@ -22,7 +22,7 @@ spec:
         - hosts: [dashboard.ops.netsoc.ga]
           secretName: tls-ops
       hosts:
-        - '*.ops.netsoc.ga'
+        - 'dashboard.ops.netsoc.ga'
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
