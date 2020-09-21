@@ -1,0 +1,29 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: podinfo
+  namespace: default
+  annotations:
+    fluxcd.io/automated: 'true'
+spec:
+  chart:
+    repository: https://netsoc.github.io/charts/
+    name: website
+    version: 0.1.0
+  values:
+    image:
+      repository: netsoc/website
+      tag: latest
+    replicaCount: 1
+    ingress:
+      enabled: true
+      tls:
+        - hosts: [www.staging.netsoc.ie]
+          secretName: tls-ops
+      hosts:
+        - host: www.staging.netsoc.ie
+          paths: [/]
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: 'true'
