@@ -12,8 +12,10 @@ spec:
       name: letsencrypt-account-key
     solvers:
     - dns01:
-        cloudflare:
-          email: jackos1998@gmail.com
-          apiTokenSecretRef:
-            name: cloudflare-apitoken
-            key: apiToken
+      rfc2136:
+        nameserver: cube.netsoc.ie
+        tsigKeyName: 'staging.netsoc.ie.'
+        tsigAlgorithm: HMACSHA512
+        tsigSecretSecretRef:
+          name: cubedns-tsig
+          key: k8s.key
