@@ -19,8 +19,8 @@ spec:
           tsigSecretSecretRef:
             name: cubedns-tsig
             key: k8s.key
-      selector:
-        dnsNames:
-          - 'staging.netsoc.ie'
-          - '*.staging.netsoc.ie'
-          - '*.ops.staging.netsoc.ie'
+#      selector:
+#        dnsNames:
+#          - 'staging.netsoc.ie'
+#          - '*.staging.netsoc.ie'
+#          - '*.ops.staging.netsoc.ie'
