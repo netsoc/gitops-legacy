@@ -13,3 +13,6 @@ spec:
     repository: https://charts.jetstack.io/
     name: cert-manager
     version: v1.0.1
+  values:
+    extraArgs:
+      - '--dns01-recursive-nameservers=1.1.1.1:53,8.8.8.8:53'
