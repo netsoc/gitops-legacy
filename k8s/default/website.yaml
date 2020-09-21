@@ -14,13 +14,13 @@ spec:
   values:
     image:
       repository: ghcr.io/netsoc/website
-      tag: 0eb5c04a7c1e69065c404d11aa825fbb63a8f4ee
+      tag: 613cc76e0ff30f12981007f58dc73193681d6538
     replicaCount: 1
     ingress:
       enabled: true
       tls:
-        - hosts: [www.staging.netsoc.ie]
-          secretName: tls-main
+      - hosts: [www.staging.netsoc.ie]
+        secretName: tls-main
       hosts:
       - host: www.staging.netsoc.ie
         paths: [/]
@@ -50,14 +50,14 @@ spec:
   - match: Host(`staging.netsoc.ie`)
     kind: Rule
     services:
-      - name: noop@internal
-        kind: TraefikService
+    - name: noop@internal
+      kind: TraefikService
     middlewares:
-      - name: www-redirect
-        namespace: default
+    - name: www-redirect
+      namespace: default
   tls:
     secretName: tls-main
     domains:
-      - main: 'staging.netsoc.ie'
-        sans:
-          - '*.staging.netsoc.ie'
+    - main: 'staging.netsoc.ie'
+      sans:
+      - '*.staging.netsoc.ie'
