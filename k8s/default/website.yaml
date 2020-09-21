@@ -19,8 +19,8 @@ spec:
     ingress:
       enabled: true
       tls:
-      - hosts: [www.staging.netsoc.ie]
-        secretName: tls-ops
+        - hosts: [www.staging.netsoc.ie]
+          secretName: tls-main
       hosts:
       - host: www.staging.netsoc.ie
         paths: [/]
