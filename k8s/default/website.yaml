@@ -12,7 +12,7 @@ spec:
     version: 0.1.0
   values:
     image:
-      repository: netsoc/website
+      repository: ghcr.io/netsoc/website
       tag: latest
     replicaCount: 1
     ingress:
