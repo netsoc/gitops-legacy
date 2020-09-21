@@ -19,10 +19,9 @@ spec:
     ingress:
       enabled: true
       tls:
-        - hosts: [dashboard.ops.netsoc.ga]
+        - hosts: [dashboard.ops.staging.netsoc.ie]
           secretName: tls-ops
-      hosts:
-        - 'dashboard.ops.netsoc.ga'
+      hosts: [dashboard.ops.staging.netsoc.ie]
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
         traefik.ingress.kubernetes.io/router.entrypoints: websecure

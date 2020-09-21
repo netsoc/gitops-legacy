@@ -19,8 +19,8 @@ spec:
     ingress:
       enabled: true
       tls:
-      - hosts: [podinfo.ops.netsoc.ga]
+      - hosts: [podinfo.ops.staging.netsoc.ie]
         secretName: tls-ops
-      hosts: [podinfo.ops.netsoc.ga]
+      hosts: [podinfo.ops.staging.netsoc.ie]
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
