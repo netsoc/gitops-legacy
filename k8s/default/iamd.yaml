@@ -20,10 +20,10 @@ spec:
             enabled: true
             tls:
             -   hosts:
-                - iam.netsoc.ie
+                - iam.staging.netsoc.ie
                 secretName: tls-main
             hosts:
-            -   host: iam.netsoc.ie
+            -   host: iam.staging.netsoc.ie
                 paths:
                 - /
             annotations:
@@ -34,7 +34,7 @@ spec:
             mail:
                 from: '"Netsoc IAM" <iamd@mg.netsoc.ie>'
                 reply_to: '"Netsoc suppourt" <support@netsoc.ie>'
-                verify_url: https://accounts.stagin.netsoc.ie/verify?token={{.Token}}
+                verify_url: https://accounts.staging.netsoc.ie/verify?token={{.Token}}
                 reset_url: https://accounts.staging.netsoc.ie/reset?token={{.Token}}
                 smtp:
                     host: smtp.eu.mailgun.org
@@ -57,8 +57,8 @@ sops:
     gcp_kms: []
     azure_kv: []
     hc_vault: []
-    lastmodified: '2020-09-21T18:01:07Z'
-    mac: ENC[AES256_GCM,data:nIrDSF3vcW+r7I/ePJhC6UvYTNtaCufE52SU9nc3I0NBJeTwg71e/dvbHgre+GuBpp2gY3Ib6BTrMoz/0Axkgjc0NwlpxplDsCWpHpP9DFffG5nsyiXmVRZA1qyUvZgtgtaMcKIv7Uu0QwwTiUtrpFGu2eDb46yl5/mchKO8aGQ=,iv:ApmH89ShvsG2Nuu8h3ZXueNkWPqzKtfiCq1EZT/ckyI=,tag:v7rkQEmazS6VdiJeIi7vtw==,type:str]
+    lastmodified: '2020-09-21T18:04:37Z'
+    mac: ENC[AES256_GCM,data:+zujshAqoseN8/7QlMJWKgHVGZhaXJ8bB9uOQbWVxluTm9G30d1PoM3TPxRmDz06QS+Np9eE3fd7N7/HG95+sm0/Hpvawndvx/SSB3cLxwbhI+jp2Q8wST9hNVFWD/96ik3SvM9CuL/yTJXCzzUO5ic6nbhmwethdg8w5kWBl9k=,iv:5pG+zM5W2juscJ58QWUCHTli6bqAgWPQ/P/M/jEqbJA=,tag:LKEzeho+hEaQDdTjoFmrKA==,type:str]
     pgp:
     -   created_at: '2020-09-21T17:55:03Z'
         enc: |
