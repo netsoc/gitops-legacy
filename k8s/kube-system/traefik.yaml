@@ -102,3 +102,4 @@ spec:
   redirectRegex:
     regex: '^https://traefik.ops.staging.netsoc.ie/(.*)'
     replacement: 'https://traefik.ops.staging.netsoc.ie/dashboard/${1}'
+    permanent: true

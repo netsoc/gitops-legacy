@@ -28,7 +28,6 @@ spec:
         cert-manager.io/cluster-issuer: letsencrypt
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: 'true'
-        traefik.ingress.kubernetes.io/router.middlewares: default-www-redirect@kubernetescrd
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
@@ -39,3 +38,27 @@ spec:
   redirectRegex:
     regex: '^https://staging.netsoc.ie/(.*)'
     replacement: 'https://www.staging.netsoc.ie/${1}'
+    permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: www-redirect
+  namespace: default
+spec:
+  entryPoints: [websecure]
+  routes:
+  - match: Host(`staging.netsoc.ie`)
+    kind: Rule
+    services:
+      - name: noop@internal
+        kind: TraefikService
+    middlewares:
+      - name: www-redirect
+        namespace: default
+  tls:
+    secretName: tls-main
+    domains:
+      - main: 'staging.netsoc.ie'
+        sans:
+          - '*.staging.netsoc.ie'
