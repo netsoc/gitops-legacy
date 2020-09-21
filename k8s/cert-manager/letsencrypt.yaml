@@ -14,6 +14,6 @@ spec:
     - dns01:
         cloudflare:
           email: jackos1998@gmail.com
-          apiKeySecretRef:
-            name: cloudflare-apikey
-            key: apiKey
+          apiTokenSecretRef:
+            name: cloudflare-apitoken
+            key: apiToken
