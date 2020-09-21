@@ -24,3 +24,4 @@ spec:
       hosts: [podinfo.ops.staging.netsoc.ie]
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        cert-manager.io/cluster-issuer: letsencrypt
