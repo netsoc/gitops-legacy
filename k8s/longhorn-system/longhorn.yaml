@@ -15,7 +15,7 @@ spec:
   values:
     ingress:
       enabled: true
-      host: [longhorn.ops.staging.netsoc.ie]
+      host: longhorn.ops.staging.netsoc.ie
       tls: true
       tlsSecret: tls-ops
       annotations:
