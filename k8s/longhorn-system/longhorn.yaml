@@ -13,6 +13,8 @@ spec:
     name: longhorn
     version: 1.0.2
   values:
+    persistence:
+      defaultClassReplicaCount: 1
     ingress:
       enabled: true
       host: longhorn.ops.staging.netsoc.ie
