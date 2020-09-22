@@ -1,0 +1,25 @@
+
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: longhorn
+  namespace: longhorn-system
+spec:
+  releaseName: longhorn
+  helmVersion: v3
+  chart:
+    repository: https://charts.longhorn.io
+    name: longhorn
+    version: 1.0.2
+  values:
+    ingress:
+      enabled: true
+      host: [longhorn.ops.staging.netsoc.ie]
+      tls: true
+      tlsSecret: tls-ops
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.middlewares: kube-system-auth@kubernetescrd
