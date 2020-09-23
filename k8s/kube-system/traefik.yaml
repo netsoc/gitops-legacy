@@ -8,18 +8,18 @@ metadata:
     fluxcd.io/automated: 'true'
     repository.fluxcd.io/traefik: image.name
     tag.fluxcd.io/traefik: image.tag
-    filter.fluxcd.io/traefik: semver:~2.3
+    filter.fluxcd.io/traefik: semver:~2.2
 spec:
   releaseName: traefik
   helmVersion: v3
   chart:
-    repository: https://helm.traefik.io/traefik
+    repository: https://containous.github.io/traefik-helm-chart
     name: traefik
-    version: 9.2.1
+    version: 9.1.0
   values:
     image:
-      name: ghcr.io/netsoc/traefik
-      tag: 2.3.0
+      name: traefik
+      tag: v2.2.11
     deployment:
       replicas: 1
     logs:
