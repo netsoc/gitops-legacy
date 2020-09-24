@@ -32,6 +32,9 @@ spec:
         enabled: true
       kubernetes:
         enabled: true
+    ingressClass:
+      enabled: true
+      isDefaultClass: true
     ports:
       web:
         protocol: TCP
