@@ -48,6 +48,6 @@ spec:
       enabled: true
   valuesFrom:
   - secretKeyRef:
-    name: iamd-secrets
+      name: iamd-secrets
   - configMapKeyRef:
-    name: iamd-reserved-users
+      name: iamd-reserved-users
