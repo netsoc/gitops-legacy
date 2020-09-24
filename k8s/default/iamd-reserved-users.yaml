@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: iamd-reserved-users
+    namespace: default
+# Anybody who's got a reasonably real username and has renewed from at least 2017 on
+data:
+    values.yaml: ENC[AES256_GCM,data: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,iv:wOqEwb1BGU7etfF6DeHItWYH6R72tO2mWFxKIvWrzOI=,tag:POJhYhQIsMBcPvwf+Jprqg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    lastmodified: '2020-09-24T21:19:11Z'
+    mac: ENC[AES256_GCM,data:X3+0Lq4yM8kZ9MMeniFm885mV4brwaW3kXCUNh7mNAIl7SDOnUsVvhU7GRHly72tV+aOHWa4TYYUiGbXEvEO+xnKh6yw9EA0xL6vERUDzeqIXYpgHRs+KXXB3lKr52U0COeTAv7VrSD2LN8EmA4zXj2rZLESz5ZyVG1lSUtrtpc=,iv:TJ+UTezd3Sls9sokz20DO+lpC6gmWd7sMuKNlpKbWT4=,tag:Hy4HoMQ/Bc3BjT8fqWuf6Q==,type:str]
+    pgp:
+    -   created_at: '2020-09-24T21:19:11Z'
+        enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQGMA5AfX+B6AMX7AQv+JgcItKOW0YthXUCrdLKHiL9kIRSI3OyYfMvlRJ/anNUN
+            /nt7me3VzBbgNWlfmLRPvCHKaatJ8FDobqpvsD8U9G8h1gCXjtqU0qjh7TshwF9Z
+            jnlQZJM5Iav1zik05Mvf5WSIin+y4ASI59Q4jTY5+RHveh+jUy9TeCdEpxbvxzzQ
+            WvUPBv8lEp1jNGAT99Uabu8riVFpCp5QSDxhVWE2IEPz3IY+xuck3kWKgJLwPMEs
+            Lw6+yhJ/soxTv21njItyWn6BRtgrLD5T0v3yTiZ8EssFXSz4VdUda1cwGcKr6YcP
+            3pRdLcf1pd8Aba0y+dxRN1StMXnIY3O8mcFr41FCOu1dFlqBK5XsaF8DCyxYTFkZ
+            hdtt8v/JGAc8CY+Q4mfOziJkZwwocayjguajVKYD698gl3+nPlZeuy08Dzahz8AF
+            xmIGNIMuGUhb+6FWvL4XM25nRGF/mBIdHrhI1f4YmYqVx9ABfh3XIA3WIQ/Wv8yR
+            ewf/LU6LLo8ym335+ccT0l4BQ0NMqP5M3BKRFjqJJbp7b3oeuffG5V39txbGVINb
+            k7fF+RNbwJzN+8Pu3hsI5VR918Pr8Qmv22AU9OzRspdNQpFcpMVhsulBfNK6wq2C
+            cJ7GGbTb0v5GzQ0viE23
+            =P+hr
+            -----END PGP MESSAGE-----
+        fp: DB2E28B13D53C8DD62FE560B408F6E592A12DF74
+    encrypted_regex: ^data$
+    version: 3.6.0
