@@ -8,7 +8,7 @@ metadata:
     fluxcd.io/automated: 'true'
     repository.fluxcd.io/traefik: image.name
     tag.fluxcd.io/traefik: image.tag
-    filter.fluxcd.io/traefik: semver:~2.3
+    filter.fluxcd.io/traefik: glob:2.3.*
 spec:
   releaseName: traefik
   helmVersion: v3
