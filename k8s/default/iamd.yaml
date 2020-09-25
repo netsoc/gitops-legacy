@@ -15,7 +15,7 @@ spec:
   values:
     image:
       repository: ghcr.io/netsoc/iamd
-      tag: 0.1.4
+      tag: 0.1.5
     replicaCount: 1
     ingress:
       enabled: true
