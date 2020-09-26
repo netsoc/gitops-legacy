@@ -24,4 +24,16 @@ spec:
         cert-manager.io/cluster-issuer: letsencrypt
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
-        traefik.ingress.kubernetes.io/router.middlewares: kube-system-auth@kubernetescrd
+        traefik.ingress.kubernetes.io/router.middlewares: >-
+          longhorn-system-force-forwarded-https@kubernetescrd,kube-system-auth@kubernetescrd
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: force-forwarded-https
+  namespace: longhorn-system
+spec:
+  headers:
+    customRequestHeaders:
+      # This seems to be required due to some weirdness with Traefik and Rancher stuff
+      X-Forwarded-Proto: "https"
