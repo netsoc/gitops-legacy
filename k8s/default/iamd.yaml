@@ -13,6 +13,9 @@ spec:
     name: iamd
     version: 0.1.4
   values:
+    global:
+      storageClass: longhorn-retain
+
     image:
       repository: ghcr.io/netsoc/iamd
       tag: 0.1.5
