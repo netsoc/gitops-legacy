@@ -10,7 +10,7 @@ spec:
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     disableAccountKeyGeneration: true
     privateKeySecretRef:
-      name: letsencrypt-account-key
+      name: letsencrypt-staging-account-key
     solvers:
     - dns01:
         rfc2136:
@@ -32,7 +32,7 @@ spec:
   acme:
     email: internet@csc.tcd.ie
     server: https://acme-v02.api.letsencrypt.org/directory
-    disableAccountKeyGeneration: true
+    disableAccountKeyGeneration: false
     privateKeySecretRef:
       name: letsencrypt-account-key
     solvers:
