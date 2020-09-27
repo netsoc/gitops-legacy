@@ -32,7 +32,7 @@ spec:
   acme:
     email: internet@csc.tcd.ie
     server: https://acme-v02.api.letsencrypt.org/directory
-    disableAccountKeyGeneration: false
+    disableAccountKeyGeneration: true
     privateKeySecretRef:
       name: letsencrypt-account-key
     solvers:
