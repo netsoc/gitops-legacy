@@ -27,7 +27,7 @@ spec:
     frontend:
       image:
         repository: ghcr.io/netsoc/accounts/frontend
-        tag: '0.1.2'
+        tag: '0.1.3'
       config:
         IAM_BASE_URL: 'https://iam.netsoc.ie/v1'
         PAYMENT_BASE_URL: https://accounts.netsoc.ie/api
