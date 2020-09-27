@@ -11,47 +11,36 @@ metadata:
 spec:
   chart:
     repository: https://netsoc.github.io/charts/
-    name: iamd
-    version: 0.1.0
+    name: accounts
+    version: 0.1.2
   values:
-    global:
-      storageClass: longhorn-retain
-
-    image:
-      repository: ghcr.io/netsoc/iamd
-      tag: 0.1.8
-    replicaCount: 1
     ingress:
       enabled: true
       tls:
-      - hosts: [iam.staging.netsoc.ie]
-        secretName: tls-main
-      hosts:
-      - host: iam.staging.netsoc.ie
-        paths: [/]
+        - hosts: [accounts.netsoc.ie]
+          secretName: tls-main
+      hosts: [accounts.netsoc.ie]
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.tls: "true"
-    config:
-      log_level: DEBUG
-      mail:
-        from: '"Netsoc IAM" <iamd@mg.netsoc.ie>'
-        reply_to: '"Netsoc suppourt" <support@netsoc.ie>'
-        verify_url: 'https://accounts.staging.netsoc.ie/verify?token={{.Token}}'
-        reset_url: 'https://accounts.staging.netsoc.ie/reset?token={{.Token}}'
-        smtp:
-          host: smtp.eu.mailgun.org
-          port: 587
-          username: iamd@mg.netsoc.ie
-          tls: true
-      jwt:
-        issuer: netsoc
-        login_validity: 8760h
-        email_validity: 24h
-    postgresql:
-      enabled: true
+        traefik.ingress.kubernetes.io/router.tls: 'true'
+
+    frontend:
+      image:
+        repository: ghcr.io/netsoc/accounts/frontend
+        tag: '0.1.0'
+      config:
+        IAM_BASE_URL: 'https://iam.netsoc.ie/v1'
+        PAYMENT_BASE_URL: https://accounts.netsoc.ie/api
+        STRIPE_PUBLIC_KEY: 'pk_test_51HUCbfI22zUrA7q8uh5If4ynHUWPQle5a6okLzwZPepabbv0WCFfjGAqqcjEsytyBbGkuFLiuSYqZmYUHFVD6zWz009n5u1Qhj'
+        MAIN_WEBSITE_URL: 'https://www.netsoc.ie/services/'
+
+    backend:
+      image:
+        repository: ghcr.io/netsoc/accounts/backend
+        tag: '0.1.0'
+      config:
+        ACCOUNTS_BASE_URL: https://accounts.netsoc.ie
+        IAMD_BASE_URL: http://default-iamd/v1
   valuesFrom:
   - secretKeyRef:
-      name: iamd-secrets
-  - configMapKeyRef:
-      name: iamd-reserved-users
+      name: accounts-secrets
