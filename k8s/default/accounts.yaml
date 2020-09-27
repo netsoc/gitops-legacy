@@ -37,7 +37,7 @@ spec:
     backend:
       image:
         repository: ghcr.io/netsoc/accounts/backend
-        tag: '0.1.1'
+        tag: '0.1.2'
       config:
         ACCOUNTS_BASE_URL: https://accounts.netsoc.ie
         IAM_BASE_URL: http://default-iamd/v1
