@@ -1,0 +1,56 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: accounts
+  namespace: default
+  annotations:
+    fluxcd.io/automated: "true"
+    filter.fluxcd.io/frontend: semver:~0.1
+    filter.fluxcd.io/backend: semver:~0.1
+spec:
+  chart:
+    repository: https://netsoc.github.io/charts/
+    name: iamd
+    version: 0.1.0
+  values:
+    global:
+      storageClass: longhorn-retain
+
+    image:
+      repository: ghcr.io/netsoc/iamd
+      tag: 0.1.5
+    replicaCount: 1
+    ingress:
+      enabled: true
+      tls:
+      - hosts: [iam.staging.netsoc.ie]
+        secretName: tls-main
+      hosts:
+      - host: iam.staging.netsoc.ie
+        paths: [/]
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+    config:
+      log_level: DEBUG
+      mail:
+        from: '"Netsoc IAM" <iamd@mg.netsoc.ie>'
+        reply_to: '"Netsoc suppourt" <support@netsoc.ie>'
+        verify_url: 'https://accounts.staging.netsoc.ie/verify?token={{.Token}}'
+        reset_url: 'https://accounts.staging.netsoc.ie/reset?token={{.Token}}'
+        smtp:
+          host: smtp.eu.mailgun.org
+          port: 587
+          username: iamd@mg.netsoc.ie
+          tls: true
+      jwt:
+        issuer: netsoc
+        login_validity: 8760h
+        email_validity: 24h
+    postgresql:
+      enabled: true
+  valuesFrom:
+  - secretKeyRef:
+      name: iamd-secrets
+  - configMapKeyRef:
+      name: iamd-reserved-users

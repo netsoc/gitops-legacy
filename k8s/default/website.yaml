@@ -61,3 +61,37 @@ spec:
     - main: 'netsoc.ie'
       sans:
       - '*.netsoc.ie'
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: tcd-redirect
+  namespace: default
+spec:
+  redirectRegex:
+    regex: '^https://(.*)netsoc.tcd.ie/(.*)'
+    replacement: 'https://${1}netsoc.ie/${2}'
+    permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: tcd-redirect
+  namespace: default
+spec:
+  entryPoints: [websecure]
+  routes:
+  - match: Host(`netsoc.tcd.ie`) || Host(`www.netsoc.tcd.ie`)
+    kind: Rule
+    services:
+    - name: noop@internal
+      kind: TraefikService
+    middlewares:
+    - name: tcd-redirect
+      namespace: default
+  tls:
+    secretName: tls-tcd
+    domains:
+    - main: 'netsoc.tcd.ie'
+      sans:
+      - '*.netsoc.tcd.ie'
