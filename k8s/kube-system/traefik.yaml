@@ -62,7 +62,7 @@ metadata:
 spec:
   entryPoints: [websecure]
   routes:
-  - match: Host(`traefik.ops.staging.netsoc.ie`)
+  - match: Host(`traefik.ops.netsoc.ie`)
     kind: Rule
     services:
     - name: api@internal
@@ -72,7 +72,7 @@ spec:
   tls:
     secretName: tls-ops
     domains:
-    - main: '*.ops.staging.netsoc.ie'
+    - main: '*.ops.netsoc.ie'
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
@@ -90,6 +90,6 @@ metadata:
   namespace: kube-system
 spec:
   redirectRegex:
-    regex: '^https://traefik.ops.staging.netsoc.ie/(.*)'
-    replacement: 'https://traefik.ops.staging.netsoc.ie/dashboard/${1}'
+    regex: '^https://traefik.ops.netsoc.ie/(.*)'
+    replacement: 'https://traefik.ops.netsoc.ie/dashboard/${1}'
     permanent: true

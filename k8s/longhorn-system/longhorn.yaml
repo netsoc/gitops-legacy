@@ -16,7 +16,7 @@ spec:
       defaultClassReplicaCount: 1
     ingress:
       enabled: true
-      host: longhorn.ops.staging.netsoc.ie
+      host: longhorn.ops.netsoc.ie
       path: '/'
       tls: true
       tlsSecret: tls-ops

@@ -19,10 +19,10 @@ spec:
     ingress:
       enabled: true
       tls:
-      - hosts: [www.staging.netsoc.ie]
+      - hosts: [www.netsoc.ie]
         secretName: tls-main
       hosts:
-      - host: www.staging.netsoc.ie
+      - host: www.netsoc.ie
         paths: [/]
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
@@ -35,8 +35,8 @@ metadata:
   namespace: default
 spec:
   redirectRegex:
-    regex: '^https://staging.netsoc.ie/(.*)'
-    replacement: 'https://www.staging.netsoc.ie/${1}'
+    regex: '^https://netsoc.ie/(.*)'
+    replacement: 'https://www.netsoc.ie/${1}'
     permanent: true
 ---
 apiVersion: traefik.containo.us/v1alpha1
@@ -47,7 +47,7 @@ metadata:
 spec:
   entryPoints: [websecure]
   routes:
-  - match: Host(`staging.netsoc.ie`)
+  - match: Host(`netsoc.ie`)
     kind: Rule
     services:
     - name: noop@internal
@@ -58,6 +58,6 @@ spec:
   tls:
     secretName: tls-main
     domains:
-    - main: 'staging.netsoc.ie'
+    - main: 'netsoc.ie'
       sans:
-      - '*.staging.netsoc.ie'
+      - '*.netsoc.ie'

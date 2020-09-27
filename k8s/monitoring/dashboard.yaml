@@ -19,9 +19,9 @@ spec:
     ingress:
       enabled: true
       tls:
-        - hosts: [dashboard.ops.staging.netsoc.ie]
+        - hosts: [dashboard.ops.netsoc.ie]
           secretName: tls-ops
-      hosts: [dashboard.ops.staging.netsoc.ie]
+      hosts: [dashboard.ops.netsoc.ie]
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"

@@ -5,8 +5,8 @@ metadata:
   namespace: default
 spec:
   dnsNames:
-    - 'staging.netsoc.ie'
-    - '*.staging.netsoc.ie'
+    - 'netsoc.ie'
+    - '*.netsoc.ie'
   issuerRef:
     kind: ClusterIssuer
     name: letsencrypt

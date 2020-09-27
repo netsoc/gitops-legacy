@@ -23,10 +23,10 @@ spec:
     ingress:
       enabled: true
       tls:
-      - hosts: [iam.staging.netsoc.ie]
+      - hosts: [iam.netsoc.ie]
         secretName: tls-main
       hosts:
-      - host: iam.staging.netsoc.ie
+      - host: iam.netsoc.ie
         paths: [/]
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
@@ -36,8 +36,8 @@ spec:
       mail:
         from: '"Netsoc IAM" <iamd@mg.netsoc.ie>'
         reply_to: '"Netsoc suppourt" <support@netsoc.ie>'
-        verify_url: 'https://accounts.staging.netsoc.ie/verify?token={{.Token}}'
-        reset_url: 'https://accounts.staging.netsoc.ie/reset?token={{.Token}}'
+        verify_url: 'https://accounts.netsoc.ie/verify?token={{.Token}}'
+        reset_url: 'https://accounts.netsoc.ie/reset?token={{.Token}}'
         smtp:
           host: smtp.eu.mailgun.org
           port: 587

@@ -6,7 +6,7 @@ metadata:
   namespace: kube-system
 spec:
   dnsNames:
-  - '*.ops.staging.netsoc.ie'
+  - '*.ops.netsoc.ie'
   issuerRef:
     kind: ClusterIssuer
     name: letsencrypt
