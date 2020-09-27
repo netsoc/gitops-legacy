@@ -40,7 +40,7 @@ spec:
         tag: '0.1.0'
       config:
         ACCOUNTS_BASE_URL: https://accounts.netsoc.ie
-        IAMD_BASE_URL: http://default-iamd/v1
+        IAM_BASE_URL: http://default-iamd/v1
   valuesFrom:
   - secretKeyRef:
       name: accounts-secrets
