@@ -1,7 +1,8 @@
+---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: letsencrypt
+  name: letsencrypt-staging
   namespace: cert-manager
 spec:
   acme:
@@ -18,9 +19,29 @@ spec:
           tsigAlgorithm: HMACSHA512
           tsigSecretSecretRef:
             name: cubedns-tsig
+            key: k8s-staging.key
+      selector:
+        dnsZones: ['staging.netsoc.ie']
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt
+  namespace: cert-manager
+spec:
+  acme:
+    email: internet@csc.tcd.ie
+    disableAccountKeyGeneration: true
+    privateKeySecretRef:
+      name: letsencrypt-account-key
+    solvers:
+    - dns01:
+        rfc2136:
+          nameserver: cube.netsoc.ie
+          tsigKeyName: 'netsoc.ie.'
+          tsigAlgorithm: HMACSHA512
+          tsigSecretSecretRef:
+            name: cubedns-tsig
             key: k8s.key
-#      selector:
-#        dnsNames:
-#          - 'staging.netsoc.ie'
-#          - '*.staging.netsoc.ie'
-#          - '*.ops.staging.netsoc.ie'
+      selector:
+        dnsZones: ['netsoc.ie']
