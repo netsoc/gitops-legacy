@@ -31,7 +31,7 @@ spec:
       config:
         IAM_BASE_URL: 'https://iam.netsoc.ie/v1'
         PAYMENT_BASE_URL: https://accounts.netsoc.ie/api
-        STRIPE_PUBLIC_KEY: pk_live_514gI43BPJxpSdBx8CBrEF4fsRfeqFvKvVEXovndX3QnR4eYnELroykjvTRsZ2RXJXFr62MYgfMrrEmVInV4jho75004xyHQLCT'
+        STRIPE_PUBLIC_KEY: 'pk_live_514gI43BPJxpSdBx8CBrEF4fsRfeqFvKvVEXovndX3QnR4eYnELroykjvTRsZ2RXJXFr62MYgfMrrEmVInV4jho75004xyHQLCT'
         MAIN_WEBSITE_URL: 'https://www.netsoc.ie/services/'
 
     backend:
