@@ -6,19 +6,19 @@ metadata:
   namespace: default
   annotations:
     fluxcd.io/automated: "true"
-    filter.fluxcd.io/chart-image: semver:~0.1
+    filter.fluxcd.io/chart-image: semver:~0.2
 spec:
   chart:
     repository: https://netsoc.github.io/charts/
     name: iamd
-    version: 0.1.4
+    version: 0.2.0
   values:
     global:
       storageClass: longhorn-retain
 
     image:
       repository: ghcr.io/netsoc/iamd
-      tag: 0.1.9
+      tag: 0.2.0
     replicaCount: 1
     ingress:
       enabled: true
@@ -47,6 +47,8 @@ spec:
         issuer: netsoc
         login_validity: 8760h
         email_validity: 24h
+      ma1sd:
+        http_address: ':8008'
     postgresql:
       enabled: true
   valuesFrom:
