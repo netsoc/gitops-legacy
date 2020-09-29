@@ -1,0 +1,30 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: ma1sd
+  namespace: matrix
+  annotations:
+    fluxcd.io/automated: 'true'
+    filter.fluxcd.io/chart-image: semver:~2.4
+spec:
+  chart:
+    repository: https://netsoc.github.io/charts/
+    name: ma1sd
+    version: 0.1.0
+  values:
+    image:
+      repository: ma1uta/ma1sd
+      tag: 2.4.0
+    persistence:
+      enabled: true
+      size: 128Mi
+    config:
+      matrix:
+        domain: 'netsoc.ie'
+      server:
+        publicUrl: 'https://matrix.netsoc.ie'
+
+      rest:
+        enabled: true
+        rest.host: http://default-iamd:8008
