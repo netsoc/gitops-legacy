@@ -30,7 +30,10 @@ spec:
       brand: Netsoc
       branding:
         welcomeBackgroundUrl: 'https://www.netsoc.ie/assets/images/matrix/bg.svg'
-        autoHeaderLogoUrl: 'https://www.netsoc.ie/assets/images/matrix/logo.png'
+        authHeaderLogoUrl: 'https://www.netsoc.ie/assets/images/matrix/logo.png'
+        authFooterLinks:
+          - text: Netsoc Account
+            url: https://accounts.netsoc.ie/
 
       welcomeUserId: ''
       defaultCountryCode: IE
