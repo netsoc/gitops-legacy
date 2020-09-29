@@ -15,7 +15,7 @@ spec:
   values:
     image:
       repository: vectorim/riot-web
-      tag: 1.7.8
+      tag: v1.7.8
 
     defaultServer:
       url: https://matrix.netsoc.ie
@@ -43,5 +43,5 @@ spec:
         traefik.ingress.kubernetes.io/router.tls: "true"
       hosts: [matrix.netsoc.ie]
       tls:
-        - secretName: tls-main
-          hosts: [matrix.netsoc.ie]
+      - secretName: tls-main
+        hosts: [matrix.netsoc.ie]
