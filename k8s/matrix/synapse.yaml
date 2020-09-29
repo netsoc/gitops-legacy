@@ -5,7 +5,7 @@ metadata:
   name: synapse
   namespace: matrix
   annotations:
-    fluxcd.io/ignore: 'false'
+    fluxcd.io/ignore: 'true'
     fluxcd.io/automated: 'false'
     filter.fluxcd.io/chart-image: semver:~1.20
 spec:
@@ -74,11 +74,13 @@ spec:
       enabled: true
       persistence:
         size: 16Gi
+        storageClass: longhorn-retain
 
     persistence:
       enabled: true
       accessMode: ReadWriteOnce
       size: 64Gi
+      storageClass: longhorn-retain
 
     service:
       port: 8008
