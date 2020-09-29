@@ -31,6 +31,8 @@ spec:
             client:
               - name: 'matrix.netsoc.ie'
                 value: 'http://matrix-synapse:8008'
+              - name: 'netsoc.ie'
+                value: 'http://matrix-synapse:8008'
 
       rest:
         enabled: true
