@@ -106,4 +106,4 @@ spec:
           hosts: [matrix.netsoc.ie]
   valuesFrom:
   - secretKeyRef:
-      name: synapse-extra
+      name: synapse-extras
