@@ -15,6 +15,7 @@ spec:
   values:
     image:
       repository: ananace/matrix-synapse
+      pullPolicy: Always
       tag: 1.20.1
 
     signingkey:
