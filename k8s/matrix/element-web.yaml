@@ -42,7 +42,7 @@ spec:
         authFooterLinks:
           - text: Manage my Netsoc account
             url: https://accounts.netsoc.ie/
-      embeddedPAges:
+      embeddedPages:
         welcomeUrl: '/overlay/welcome.html'
 
       welcomeUserId: ''
