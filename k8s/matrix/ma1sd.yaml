@@ -25,6 +25,13 @@ spec:
       server:
         publicUrl: 'https://matrix.netsoc.ie'
 
+      dns:
+        overwrite:
+          homeserver:
+            client:
+              - name: 'matrix.netsoc.ie'
+                value: 'http://matrix-synapse:8008'
+
       rest:
         enabled: true
         host: http://default-iamd:8008
