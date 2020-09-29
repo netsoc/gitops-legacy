@@ -1,0 +1,109 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: synapse
+  namespace: matrix
+  annotations:
+    fluxcd.io/automated: 'true'
+    filter.fluxcd.io/chart-image: semver:~1.20
+spec:
+  chart:
+    repository: https://ananace.gitlab.io/charts/
+    name: matrix-synapse
+    version: 1.3.6
+  values:
+    image:
+      repository: ananace/matrix-synapse
+      tag: 1.20.1
+
+    signingkey:
+      job:
+        enabled: false
+      existingSecret: synapse-extras
+      existingSecretKey: signing.key
+
+    serverName: netsoc.ie
+    publicServerName: matrix.netsoc.ie
+
+    config:
+      logLevel: INFO
+
+      enableRegistration: false
+
+    extraConfig:
+      max_upload_size: 64M
+      max_image_pixels: 32M
+
+      url_preview_enabled: true
+      url_preview_ip_range_blacklist:
+      - '127.0.0.0/8'
+      - '10.0.0.0/8'
+      - '172.16.0.0/12'
+      - '192.168.0.0/16'
+      - '100.64.0.0/10'
+      - '169.254.0.0/16'
+      - '::1/128'
+      - 'fe80::/64'
+      - 'fc00::/7'
+
+      allow_guest_access: false
+      trusted_third_party_id_servers: [matrix.netsoc.ie]
+      password_providers:
+        - module: rest_auth_provider.RestAuthProvider
+          config:
+            endpoint: 'http://matrix-ma1sd:8090'
+
+    synapse:
+      extraCommands:
+        - >-
+          curl -Lo $(python -c "import site; print(site.getsitepackages()[0])")/rest_auth_provider.py
+          https://raw.githubusercontent.com/ma1uta/matrix-synapse-rest-password-provider/master/rest_auth_provider.py
+
+    postgresql:
+      enabled: true
+      persistence:
+        size: 16Gi
+
+    persistence:
+      enabled: true
+      accessMode: ReadWriteOnce
+      size: 64Gi
+
+    service:
+      port: 8008
+
+    ingress:
+      enabled: true
+      traefikPaths: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+
+      includeServerName: false
+      includeUnderscoreSynapse: true
+
+      hosts: [matrix.netsoc.ie]
+      csHosts: [matrix.netsoc.ie]
+
+      paths:
+        - path: /_matrix/identity
+          backend:
+            serviceName: matrix-ma1sd
+            servicePort: 8090
+      csPaths:
+        - path: /_matrix/client/r0/user_directory
+          backend:
+            serviceName: matrix-ma1sd
+            servicePort: 8090
+        - path: /_matrix/client/r0/login
+          backend:
+            serviceName: matrix-ma1sd
+            servicePort: 8090
+
+      tls:
+        - secretName: tls-main
+          hosts: [matrix.netsoc.ie]
+  valuesFrom:
+  - secretKeyRef:
+      name: synapse-extra
