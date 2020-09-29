@@ -27,4 +27,4 @@ spec:
 
       rest:
         enabled: true
-        rest.host: http://default-iamd:8008
+        host: http://default-iamd:8008
