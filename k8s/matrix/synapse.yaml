@@ -63,11 +63,12 @@ spec:
                 profile:
                   name: true
 
-    synapse:
-      extraCommands:
-        - >-
-          curl -Lo $(python -c "import site; print(site.getsitepackages()[0])")/rest_auth_provider.py
-          https://raw.githubusercontent.com/ma1uta/matrix-synapse-rest-password-provider/master/rest_auth_provider.py
+    # Need newer images for curl...
+    #synapse:
+    #  extraCommands:
+    #    - >-
+    #      curl -Lo $(python -c "import site; print(site.getsitepackages()[0])")/rest_auth_provider.py
+    #      https://raw.githubusercontent.com/ma1uta/matrix-synapse-rest-password-provider/master/rest_auth_provider.py
 
     postgresql:
       enabled: true
