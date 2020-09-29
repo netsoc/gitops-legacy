@@ -33,6 +33,8 @@ spec:
         traefik.ingress.kubernetes.io/router.tls: "true"
     config:
       log_level: DEBUG
+      postgresql:
+        soft_delete: false
       mail:
         from: '"Netsoc IAM" <iamd@mg.netsoc.ie>'
         reply_to: '"Netsoc suppourt" <support@netsoc.ie>'
