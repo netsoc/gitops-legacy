@@ -7,6 +7,7 @@ metadata:
   annotations:
     fluxcd.io/automated: 'false'
     filter.fluxcd.io/chart-image: semver:~1.18
+    fluxcd.io/ignore: true
 spec:
   chart:
     repository: https://ananace.gitlab.io/charts/
