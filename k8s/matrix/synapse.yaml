@@ -5,7 +5,6 @@ metadata:
   name: synapse
   namespace: matrix
   annotations:
-    fluxcd.io/ignore: 'true'
     fluxcd.io/automated: 'false'
     filter.fluxcd.io/chart-image: semver:~1.20
 spec:
@@ -82,6 +81,10 @@ spec:
       size: 64Gi
       storageClass: longhorn-retain
 
+      existingClaim: synapse-medias
+    volumePermissions:
+      enabled: false
+
     service:
       port: 8008
 
@@ -92,7 +95,7 @@ spec:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
 
-      includeServerName: false
+      includeServerName: true
       includeUnderscoreSynapse: true
 
       hosts: [matrix.netsoc.ie]
@@ -103,7 +106,19 @@ spec:
           backend:
             serviceName: matrix-ma1sd
             servicePort: 8090
+        - path: /_matrix/client/r0/user_directory
+          backend:
+            serviceName: matrix-ma1sd
+            servicePort: 8090
+        - path: /_matrix/client/r0/login
+          backend:
+            serviceName: matrix-ma1sd
+            servicePort: 8090
       csPaths:
+        - path: /_matrix/identity
+          backend:
+            serviceName: matrix-ma1sd
+            servicePort: 8090
         - path: /_matrix/client/r0/user_directory
           backend:
             serviceName: matrix-ma1sd
@@ -119,3 +134,16 @@ spec:
   valuesFrom:
   - secretKeyRef:
       name: synapse-extras
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: synapse-media
+  namespace: matrix
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 64Gi
+  storageClassName: longhorn-static
+  volumeName: synapse-media
