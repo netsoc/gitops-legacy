@@ -34,4 +34,4 @@ spec:
 
       rest:
         enabled: true
-        host: http://default-iamd:8008
+        host: http://default-iamd.default:8008
