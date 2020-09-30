@@ -1,0 +1,49 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: zammad
+  namespace: support
+  annotations:
+    fluxcd.io/automated: 'false'
+spec:
+  chart:
+    repository: https://zammad.github.io
+    name: zammad
+    version: 2.6.1
+  values:
+    image:
+      repository: zammad/zammad-docker-compose
+      tag: 3.5.0-2
+
+    envConfig:
+      elasticsearch:
+        host: ''
+        reindex: false
+
+    persistence:
+      enabled: true
+      size: 16Gi
+      storageClass: longhorn-retain
+
+    elasticsearch:
+      enabled: false
+
+    postgresql:
+      enabled: true
+      persistence:
+        enabled: true
+        size: 8Gi
+        storageClass: longhorn-retain
+
+    ingress:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: 'true'
+      hosts:
+        - host: support.netsoc.ie
+          paths: [/]
+      tls:
+        - hosts: [support.netsoc.ie]
+          secretName: tls-main
