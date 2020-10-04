@@ -40,9 +40,20 @@ spec:
     permanent: true
 ---
 apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: events-redirect
+  namespace: default
+spec:
+  redirectRegex:
+    regex: '^https://www.netsoc.ie/event$'
+    replacement: 'https://tcd-ie.zoom.us/j/8820425304?pwd=OFdSK3M3UWJDRkZ1NXlUbTBicFNodz09'
+    permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: www-redirect
+  name: website-redirects
   namespace: default
 spec:
   entryPoints: [websecure]
@@ -54,6 +65,8 @@ spec:
       kind: TraefikService
     middlewares:
     - name: www-redirect
+      namespace: default
+    - name: events-redirect
       namespace: default
   tls:
     secretName: tls-main
