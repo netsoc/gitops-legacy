@@ -15,7 +15,7 @@ spec:
   chart:
     repository: https://helm.traefik.io/traefik
     name: traefik
-    version: 9.3.0
+    version: 9.4.3
   values:
     image:
       name: ghcr.io/netsoc/traefik
