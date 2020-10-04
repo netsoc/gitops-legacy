@@ -27,6 +27,7 @@ spec:
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: 'true'
+        traefik.ingress.kubernetes.io/router.middlewares: default-events-redirect@kubernetescrd
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
@@ -53,7 +54,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: website-redirects
+  name: www-redirect
   namespace: default
 spec:
   entryPoints: [websecure]
@@ -65,8 +66,6 @@ spec:
       kind: TraefikService
     middlewares:
     - name: www-redirect
-      namespace: default
-    - name: events-redirect
       namespace: default
   tls:
     secretName: tls-main
