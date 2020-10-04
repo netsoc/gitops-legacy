@@ -19,7 +19,7 @@ spec:
   values:
     image:
       name: ghcr.io/netsoc/traefik
-      tag: 2.3.0-9bd3fc3f
+      tag: 2.3.0-a676620c
     deployment:
       replicas: 1
     logs:
