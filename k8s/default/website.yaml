@@ -46,7 +46,7 @@ metadata:
   namespace: default
 spec:
   redirectRegex:
-    regex: '^https://www.netsoc.ie/event$'
+    regex: '^https://www.netsoc.ie/event/?$'
     replacement: 'https://tcd-ie.zoom.us/j/8820425304?pwd=OFdSK3M3UWJDRkZ1NXlUbTBicFNodz09'
     permanent: true
 ---
