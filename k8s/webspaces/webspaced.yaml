@@ -62,7 +62,7 @@ spec:
           - '*.netsoc.ie'
           - '*.ng.netsoc.ie'
       lxd:
-        url: 'https://lxd8s'
+        url: 'https://webspaces-lxd8s'
         tls:
           ca: |
             -----BEGIN CERTIFICATE-----
