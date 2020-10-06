@@ -43,7 +43,7 @@ spec:
     config:
       log_level: DEBUG
       iam:
-        url: 'http://default-iamd.default'
+        url: 'http://default-iamd.default/v1'
       webspaces:
         lxd_profile: default
         instance_prefix: 'ws-'
