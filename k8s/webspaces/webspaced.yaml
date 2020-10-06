@@ -1,0 +1,134 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: webspaced
+  namespace: webspaces
+  annotations:
+    fluxcd.io/automated: 'false'
+    #filter.fluxcd.io/chart-image: semver:~0.1
+spec:
+  chart:
+    repository: https://netsoc.github.io/charts/
+    name: webspaced
+    version: 0.1.2
+  values:
+    image:
+      repository: ghcr.io/netsoc/webspaced
+      tag: 6238f78c1a8b2e55f19a366d0ea9d7078623734f
+
+    global:
+      kubelan:
+        externalConfigMap: kubelan
+
+    fwdService:
+      enabled: true
+      type: LoadBalancer
+      dummyPort: 6969
+
+    ingress:
+      enabled: true
+      hosts:
+        - host: webspaced.netsoc.ie
+          paths: [/]
+
+    staticIP: '172.24.254.2/16'
+
+    config:
+      log_level: DEBUG
+      iam:
+        url: 'http://default-iamd.default'
+      webspaces:
+        lxd_profile: default
+        instance_prefix: 'ws-'
+        domain: ng.netsoc.ie
+        config_defaults:
+          startup_delay: 5
+          http_port: 80
+          sni_passthrough: false
+        max_startup_delay: 60
+        ip_timeout: '15s'
+        ports:
+          start: 49152
+          end: 65535
+          max: 64
+      traefik:
+        kubernetes:
+          default_secret: tls-main
+          cluster_issuer: letsencrypt-staging
+        https_entrypoint: https
+        default_sans:
+          - 'netsoc.ie'
+          - '*.netsoc.ie'
+          - '*.ng.netsoc.ie'
+      lxd:
+        url: 'https://lxd8s'
+        tls:
+          ca: |
+            -----BEGIN CERTIFICATE-----
+            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
+            -----END CERTIFICATE-----
+          client_cert: |
+            -----BEGIN CERTIFICATE-----
+            MIIEnjCCAoYCFEg090L7H8cnCsQu0Zdy1qEUMA6mMA0GCSqGSIb3DQEBCwUAMIGd
+            MQswCQYDVQQGEwJJRTEPMA0GA1UECAwGRHVibGluMR8wHQYDVQQHDBZUcmluaXR5
+            IENvbGxlZ2UgRHVibGluMQ8wDQYDVQQKDAZOZXRzb2MxEzARBgNVBAsMCkt1YmVy
+            bmV0ZXMxFDASBgNVBAMMC0xYRCBSb290IENBMSAwHgYJKoZIhvcNAQkBFhFzdXBw
+            b3J0QG5ldHNvYy5pZTAeFw0yMDEwMDYyMjIyMjFaFw0zMDEwMDQyMjIyMjFaMHkx
+            CzAJBgNVBAYTAklFMQ8wDQYDVQQIDAZEdWJsaW4xHzAdBgNVBAcMFlRyaW5pdHkg
+            Q29sbGVnZSBEdWJsaW4xDzANBgNVBAoMBk5ldHNvYzETMBEGA1UECwwKS3ViZXJu
+            ZXRlczESMBAGA1UEAwwJd2Vic3BhY2VkMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A
+            MIIBCgKCAQEAoksDT0pEzy5nKyvy6XF3Tnhgf07i3mbTcg1KU15wRYgwxqTQhOYG
+            fNSxcPtLuVGR8+I3U3sdh1bI0G8CP64y/w+uQWa5mCWswiPZ8ElBbjdmKsHByNh5
+            b3ZLRLcOZKw08XkyxIHNFr5yrZGVkZ4I5ipqCL+H6mrvzInGv+TRtLnjQlobY8ib
+            QbtQVCL5q/OvqLDOMaxiw50SsPt5u1wMMBYutI18OEBJBezuI7ve2zOTFZ8Ufe4R
+            g9wtqd6DVyFGmirSTH/JlarMlx194Vy4BqNUH+He4JPSQJN8PaIreMORbiS9edKj
+            H/mshtjOxHeSPG/lDjgJuqBZQLYwQBqRLQIDAQABMA0GCSqGSIb3DQEBCwUAA4IC
+            AQBfN5Pr+MmGn7C3Ms6blL24PqOlGKd7KBzgzCDFZ+whOf2TzcrVRc6z3gEw/jMU
+            ueufNUEsCEl9Cg9E0chvk6HtJYzuro/uIaIZwYopI/rS5nzHXs5s09ZhUKVQyEuy
+            f08lX3/wb0ikwbvg2M//hZOEvHZg8uDrh/R0xq79L4vVC9zwp2BIipsChTqqWqmV
+            4B7Yq6TLGsfCHN+PpDze8A6DDGgFkpB0UkCFvfqoZFhAiGjPWZm8r6LSvDHtKsyU
+            wgVcpXs9JazbmRWI42pgBcdBvEG6yVMw/8ZbVN2+2rgU9HSS/A2dzWHLVvcqjw+x
+            r7IbS9qrQeLSgti7MnaFZQCxTNXeJq/8AcoVosX41/xBF0+T1xYSdy6QLgXTvB2D
+            H1lkF1MPicxEIRnZNoxW/pYWM8vPPbhoAUEQMzZ4FcDY6VVuo+PJej3qnRBKsgAn
+            Zavp7S1EzOVyRWuVdjSpyynBT9afH+FuuJ9jk0bm1QhL9XZNVussg8t6VMAMiJ4/
+            F9w31QAdhpH1R3G3R/qUBasfay2PktwJ8fhd5BTABL1aOEYFhJKw2UBN0DBlqkVR
+            1XJbbpwoZ74lHxf0KgFUM0V7DAtfie5X8vt+A7CbiJx6S5W0xCMbY/cj07Ljyvfp
+            8H1A6jBL5QccKKgjPoSBBbzmHo6TTT8SFhGwVcUjZnfXdQ==
+            -----END CERTIFICATE-----
+
+  valuesFrom:
+  - secretKeyRef:
+      name: webspaced-secrets
