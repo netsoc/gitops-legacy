@@ -23,6 +23,7 @@ spec:
         vxlan:
           interface: lxd-overlay
 
+    debug: 'yes'
     upstreamDNS:
       - '1.1.1.1'
       - '8.8.8.8'
