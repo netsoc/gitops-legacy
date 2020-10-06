@@ -7,9 +7,9 @@ data:
   kubelan.yaml: |
     log_level: DEBUG
     services:
-      - dnsmasq
-      - lxd8s
-      - webspaced
+      - webspaces-dnsmasq
+      - webspaces-lxd8s
+      - webspaces-webspaced
       - kube-system/traefik
     vxlan:
       interface: lxd-overlay

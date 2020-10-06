@@ -96,7 +96,7 @@ spec:
             - name: KL_LOG_LEVEL
               value: DEBUG
             - name: KL_SERVICES
-              value: 'traefik,webspaces/dnsmasq,webspaces/lxd8s,webspaces/webspaced'
+              value: 'traefik,webspaces/webspaces-dnsmasq,webspaces/webspaces-lxd8s,webspaces/webspaces-webspaced'
             - name: KL_VXLAN_INTERFACE
               value: lxd-overlay
             - name: KL_VXLAN_VNI
