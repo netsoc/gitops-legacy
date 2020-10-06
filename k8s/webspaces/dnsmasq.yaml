@@ -17,25 +17,25 @@ spec:
       repository: ghcr.io/devplayer0/dnsmasq
       tag: 0.1.0
 
-      global:
-        kubelan:
-          externalConfigMap: kubelan
-          vxlan:
-            interface: lxd-overlay
+    global:
+      kubelan:
+        externalConfigMap: kubelan
+        vxlan:
+          interface: lxd-overlay
 
-      upstreamDNS:
-        - '1.1.1.1'
-        - '8.8.8.8'
-      staticIP: '172.24.254.1/16'
-      routerNetwork: '172.24.0.0/16'
-      config:
-        dns:
-          domain: webspace
-        dhcp:
-          dhcp-range: 172.24.1.1,172.24.253.254,2h
-          dhcp-option: option:router,172.24.254.1
-          dhcp-option: option:dns-server,172.24.254.1
+    upstreamDNS:
+      - '1.1.1.1'
+      - '8.8.8.8'
+    staticIP: '172.24.254.1/16'
+    routerNetwork: '172.24.0.0/16'
+    config:
+      dns:
+        domain: webspace
+      dhcp:
+        dhcp-range: 172.24.1.1,172.24.253.254,2h
+        dhcp-option: option:router,172.24.254.1
+        dhcp-option: option:dns-server,172.24.254.1
 
-      persistence:
-        enabled: true
-        storageClass: longhorn-retain
+    persistence:
+      enabled: true
+      storageClass: longhorn-retain
