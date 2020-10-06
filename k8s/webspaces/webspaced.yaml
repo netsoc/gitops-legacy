@@ -62,7 +62,7 @@ spec:
         kubernetes:
           default_secret: tls-main
           cluster_issuer: letsencrypt-staging
-        https_entrypoint: webspaced
+        https_entrypoint: websecure
         default_sans:
           - 'netsoc.ie'
           - '*.netsoc.ie'
