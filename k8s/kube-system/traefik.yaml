@@ -1,4 +1,28 @@
 ---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: traefik-kubelan
+  namespace: kube-system
+rules:
+  - apiGroups: ['discovery.k8s.io']
+    resources: ['endpointslices']
+    verbs: ['watch', 'list']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: traefik-kubelan
+  namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: traefik-kubelan
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: traefik
+    namespace: kube-system
+---
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
@@ -20,8 +44,6 @@ spec:
     image:
       name: ghcr.io/netsoc/traefik
       tag: 2.3.1-66099221
-    deployment:
-      replicas: 1
     logs:
       general:
         level: DEBUG
@@ -53,6 +75,46 @@ spec:
     ingressRoute:
       dashboard:
         enabled: false
+    deployment:
+      replicas: 1
+      additionalContainers:
+        - name: kubelan
+          image: 'ghcr.io/devplayer0/kubelan:0.2.2'
+          env:
+            - name: KL_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: KL_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+
+            - name: IFACE_IP
+              value: '172.24.0.254/16'
+
+            - name: KL_LOG_LEVEL
+              value: DEBUG
+            - name: KL_SERVICES
+              value: 'traefik,webspaces/dnsmasq,webspaces/lxd8s,webspaces/webspaced'
+            - name: KL_VXLAN_INTERFACE
+              value: lxd-overlay
+            - name: KL_VXLAN_VNI
+              value: '7331'
+            - name: KL_HOOKS_UP
+              value: 'sh,-c,ip addr add $IFACE_IP dev $IFACE'
+          ports:
+            - name: http
+              containerPort: 8181
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            periodSeconds: 5
+          securityContext:
+            capabilities:
+              add: [NET_ADMIN]
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
