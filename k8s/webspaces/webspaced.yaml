@@ -28,9 +28,15 @@ spec:
 
     ingress:
       enabled: true
+      tls:
+        - hosts: [webspaced.netsoc.ie]
+          secretName: tls-main
       hosts:
         - host: webspaced.netsoc.ie
           paths: [/]
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: 'true'
 
     staticIP: '172.24.254.2/16'
 
@@ -128,7 +134,6 @@ spec:
             1XJbbpwoZ74lHxf0KgFUM0V7DAtfie5X8vt+A7CbiJx6S5W0xCMbY/cj07Ljyvfp
             8H1A6jBL5QccKKgjPoSBBbzmHo6TTT8SFhGwVcUjZnfXdQ==
             -----END CERTIFICATE-----
-
   valuesFrom:
   - secretKeyRef:
       name: webspaced-secrets
