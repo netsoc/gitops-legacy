@@ -22,6 +22,9 @@ spec:
             key: k8s-staging.key
       selector:
         dnsZones: ['staging.netsoc.ie']
+    - http01:
+        ingress:
+          serviceType: ClusterIP
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
@@ -46,3 +49,6 @@ spec:
             key: k8s.key
       selector:
         dnsZones: ['netsoc.ie']
+    - http01:
+        ingress:
+          serviceType: ClusterIP
