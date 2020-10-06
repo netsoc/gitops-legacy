@@ -1,0 +1,115 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: lxd8s
+  namespace: webspaces
+  annotations:
+    fluxcd.io/automated: 'false'
+    #filter.fluxcd.io/chart-image: semver:~0.1
+spec:
+  chart:
+    repository: https://netsoc.github.io/charts/
+    name: lxd8s
+    version: 0.2.1
+  values:
+    image:
+      repository: ghcr.io/netsoc/lxd8s
+      tag: 0c82413f36b624d5f7d1aad64e73327a1c28fb24
+
+    certCount: 1
+    replicaCount: 1
+    certs:
+      duration: 87600h # 10 years
+      renewBefore: 360h # 15 days
+      key:
+        algorithm: RSA
+        encoding: PKCS1
+        size: 2048
+      subject:
+        countries: [IE]
+        provinces: [Dublin]
+        localities: [Trinity College Dublin]
+        organizations: [Netsoc]
+
+    resources:
+      limits:
+        hostdev.k8s.io/dev_kvm: 1
+        cpu: 14000m
+        memory: 14Gi
+      requests:
+        cpu: 14000m
+        memory: 13Gi
+    vm:
+      cpus: 14
+      memory: 13312
+    firectlTimeout: 30000
+
+    storageClass: longhorn-retain
+    pvc:
+      lxd:
+        size: 16Gi
+      storage:
+        size: 96Gi
+
+    global:
+      kubelan:
+        externalConfigMap: kubelan
+
+    nat:
+      host: 192.168.69.1/30
+      vm: 192.168.69.2/30
+    network: '172.24.0.0/16'
+
+    preseed:
+      profiles:
+        - name: default
+          config:
+            boot.autostart: 'false'
+            limits.cpu: '1'
+            limits.memory: '1024MiB'
+            security.nesting: 'true'
+          devices:
+            root:
+              size: 8GiB
+
+    ca:
+      cert: |
+        -----BEGIN CERTIFICATE-----
+        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
+        -----END CERTIFICATE-----
+  valuesFrom:
+  - secretKeyRef:
+      name: lxd8s-secrets
