@@ -1,0 +1,41 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: dnsmasq
+  namespace: webspaces
+  annotations:
+    fluxcd.io/automated: 'true'
+    filter.fluxcd.io/chart-image: semver:~0.1
+spec:
+  chart:
+    repository: https://devplayer0.github.io/charts/
+    name: dnsmasq
+    version: 0.1.2
+  values:
+    image:
+      repository: ghcr.io/devplayer0/kubelan
+      tag: 0.1.0
+
+      global:
+        kubelan:
+          externalConfigMap: kubelan
+          vxlan:
+            interface: lxd-overlay
+
+      upstreamDNS:
+        - '1.1.1.1'
+        - '8.8.8.8'
+      staticIP: '172.24.254.1/16'
+      routerNetwork: '172.24.0.0/16'
+      config:
+        dns:
+          domain: webspace
+        dhcp:
+          dhcp-range: 172.24.1.1,172.24.253.254,2h
+          dhcp-option: option:router,172.24.254.1
+          dhcp-option: option:dns-server,172.24.254.1
+
+      persistence:
+        enabled: true
+        storageClass: longhorn-retain
