@@ -25,6 +25,11 @@ spec:
     - http01:
         ingress:
           serviceType: ClusterIP
+          ingressTemplate:
+            metadata:
+              annotations:
+                traefik.ingress.kubernetes.io/router.entrypoints: websecure
+                traefik.ingress.kubernetes.io/router.tls: 'true'
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
@@ -52,3 +57,8 @@ spec:
     - http01:
         ingress:
           serviceType: ClusterIP
+          ingressTemplate:
+            metadata:
+              annotations:
+                traefik.ingress.kubernetes.io/router.entrypoints: websecure
+                traefik.ingress.kubernetes.io/router.tls: 'true'
