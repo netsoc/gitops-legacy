@@ -11,7 +11,7 @@ spec:
   chart:
     repository: https://netsoc.github.io/charts/
     name: lxd8s
-    version: 0.2.2
+    version: 0.2.4
   values:
     image:
       repository: ghcr.io/netsoc/lxd8s
@@ -60,6 +60,9 @@ spec:
       host: 192.168.69.1/30
       vm: 192.168.69.2/30
     network: '172.24.0.0/16'
+
+    oomInterval: 5s
+    oomMinFree: '128'
 
     preseed:
       profiles:
