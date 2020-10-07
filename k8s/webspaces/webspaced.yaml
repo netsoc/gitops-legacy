@@ -5,13 +5,13 @@ metadata:
   name: webspaced
   namespace: webspaces
   annotations:
-    fluxcd.io/automated: 'false'
-    #filter.fluxcd.io/chart-image: semver:~0.1
+    fluxcd.io/automated: 'true'
+    filter.fluxcd.io/chart-image: semver:~0.1
 spec:
   chart:
     repository: https://netsoc.github.io/charts/
     name: webspaced
-    version: 0.1.2
+    version: 0.1.3
   values:
     image:
       repository: ghcr.io/netsoc/webspaced
