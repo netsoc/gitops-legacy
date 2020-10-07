@@ -5,13 +5,13 @@ metadata:
   name: lxd8s
   namespace: webspaces
   annotations:
-    fluxcd.io/automated: 'false'
-    #filter.fluxcd.io/chart-image: semver:~0.1
+    fluxcd.io/automated: 'true'
+    filter.fluxcd.io/chart-image: semver:~0.1
 spec:
   chart:
     repository: https://netsoc.github.io/charts/
     name: lxd8s
-    version: 0.2.1
+    version: 0.2.2
   values:
     image:
       repository: ghcr.io/netsoc/lxd8s
