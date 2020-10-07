@@ -61,7 +61,7 @@ spec:
       traefik:
         kubernetes:
           default_secret: tls-main
-          cluster_issuer: letsencrypt-staging
+          cluster_issuer: letsencrypt
         https_entrypoint: websecure
         default_sans:
           - 'netsoc.ie'
