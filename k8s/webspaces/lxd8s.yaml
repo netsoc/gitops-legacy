@@ -15,7 +15,7 @@ spec:
   values:
     image:
       repository: ghcr.io/netsoc/lxd8s
-      tag: 0c82413f36b624d5f7d1aad64e73327a1c28fb24
+      tag: 0.1.0
 
     certCount: 1
     replicaCount: 1
@@ -63,15 +63,15 @@ spec:
 
     preseed:
       profiles:
-        - name: default
-          config:
-            boot.autostart: 'false'
-            limits.cpu: '1'
-            limits.memory: '1024MiB'
-            security.nesting: 'true'
-          devices:
-            root:
-              size: 8GiB
+      - name: default
+        config:
+          boot.autostart: 'false'
+          limits.cpu: '1'
+          limits.memory: '1024MiB'
+          security.nesting: 'true'
+        devices:
+          root:
+            size: 8GiB
 
     ca:
       cert: |
