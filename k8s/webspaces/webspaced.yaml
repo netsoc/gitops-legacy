@@ -15,7 +15,7 @@ spec:
   values:
     image:
       repository: ghcr.io/netsoc/webspaced
-      tag: da557c26261fe6a3fecc774fdaa0c7a2b9f8532f
+      tag: 0.1.0
 
     global:
       kubelan:
@@ -29,11 +29,11 @@ spec:
     ingress:
       enabled: true
       tls:
-        - hosts: [webspaced.netsoc.ie]
-          secretName: tls-main
+      - hosts: [webspaced.netsoc.ie]
+        secretName: tls-main
       hosts:
-        - host: webspaced.netsoc.ie
-          paths: [/]
+      - host: webspaced.netsoc.ie
+        paths: [/]
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: 'true'
@@ -64,9 +64,9 @@ spec:
           cluster_issuer: letsencrypt
         https_entrypoint: websecure
         default_sans:
-          - 'netsoc.ie'
-          - '*.netsoc.ie'
-          - '*.ng.netsoc.ie'
+        - 'netsoc.ie'
+        - '*.netsoc.ie'
+        - '*.ng.netsoc.ie'
       lxd:
         url: 'https://webspaces-lxd8s'
         tls:
