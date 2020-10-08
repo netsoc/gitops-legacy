@@ -60,7 +60,7 @@ spec:
                   name: true
               login:
                 profile:
-                  name: true
+                  name: false
 
     synapse:
       extraCommands:
