@@ -27,17 +27,17 @@ spec:
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: 'true'
-        traefik.ingress.kubernetes.io/router.middlewares: default-events-redirect@kubernetescrd
+        traefik.ingress.kubernetes.io/router.middlewares: default-events-redirect@kubernetescrd,default-cli-redirect@kubernetescrd
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: www-redirect
+  name: cli-redirect
   namespace: default
 spec:
   redirectRegex:
-    regex: '^https://netsoc.ie/(.*)'
-    replacement: 'https://www.netsoc.ie/${1}'
+    regex: '^https://www.netsoc.ie/cli/?$'
+    replacement: 'https://github.com/netsoc/cli/releases/latest'
     permanent: true
 ---
 apiVersion: traefik.containo.us/v1alpha1
@@ -49,6 +49,17 @@ spec:
   redirectRegex:
     regex: '^https://www.netsoc.ie/event/?$'
     replacement: 'https://tcd-ie.zoom.us/j/8820425304?pwd=OFdSK3M3UWJDRkZ1NXlUbTBicFNodz09'
+    permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: www-redirect
+  namespace: default
+spec:
+  redirectRegex:
+    regex: '^https://netsoc.ie/(.*)'
+    replacement: 'https://www.netsoc.ie/${1}'
     permanent: true
 ---
 apiVersion: traefik.containo.us/v1alpha1
