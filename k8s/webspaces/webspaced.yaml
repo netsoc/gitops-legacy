@@ -6,7 +6,7 @@ metadata:
   namespace: webspaces
   annotations:
     fluxcd.io/automated: 'true'
-    filter.fluxcd.io/chart-image: semver:~0.1
+    filter.fluxcd.io/chart-image: semver:~0.2
 spec:
   chart:
     repository: https://netsoc.github.io/charts/
