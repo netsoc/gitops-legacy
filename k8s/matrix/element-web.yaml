@@ -15,15 +15,15 @@ spec:
   values:
     image:
       repository: vectorim/riot-web
-      tag: v1.7.8
+      tag: v1.7.9
 
     extraVolumes:
-      - name: overlay
-        configMap:
-          name: element-web-overlay
+    - name: overlay
+      configMap:
+        name: element-web-overlay
     extraVolumeMounts:
-      - name: overlay
-        mountPath: /app/overlay
+    - name: overlay
+      mountPath: /app/overlay
 
     defaultServer:
       url: https://matrix.netsoc.ie
@@ -40,8 +40,8 @@ spec:
         welcomeBackgroundUrl: 'https://www.netsoc.ie/assets/images/matrix/bg.svg'
         authHeaderLogoUrl: 'https://www.netsoc.ie/assets/images/matrix/logo.png'
         authFooterLinks:
-          - text: Manage my Netsoc account
-            url: https://accounts.netsoc.ie/
+        - text: Manage my Netsoc account
+          url: https://accounts.netsoc.ie/
       embeddedPages:
         welcomeUrl: '/overlay/welcome.html'
 
