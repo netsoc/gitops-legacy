@@ -15,7 +15,7 @@ spec:
   values:
     image:
       repository: ghcr.io/netsoc/webspaced
-      tag: 0.2.0
+      tag: 0.2.1
 
     global:
       kubelan:
