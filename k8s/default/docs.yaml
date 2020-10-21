@@ -1,0 +1,29 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: docs
+  namespace: default
+  annotations:
+    fluxcd.io/automated: 'true'
+spec:
+  chart:
+    repository: https://netsoc.github.io/charts/
+    name: docs
+    version: 0.1.0
+  values:
+    image:
+      repository: ghcr.io/netsoc/docs
+      tag: latest
+    replicaCount: 1
+    ingress:
+      enabled: true
+      tls:
+      - hosts: [docs.netsoc.ie]
+        secretName: tls-main
+      hosts:
+      - host: docs.netsoc.ie
+        paths: [/]
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: 'true'
