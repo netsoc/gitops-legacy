@@ -20,6 +20,12 @@ spec:
     config:
       iam:
         url: 'http://default-iamd.default/v1'
+      jail:
+        greeting: |
+          Welcome to Netsoc SHH (not a typo :P).
+          The latest version of the CLI is pre-installed (type netsoc).
+
+          For more information, see https://docs.netsoc.ie/shh/.
 
   valuesFrom:
   - secretKeyRef:
