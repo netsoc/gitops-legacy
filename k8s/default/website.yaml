@@ -27,7 +27,7 @@ spec:
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: 'true'
-        traefik.ingress.kubernetes.io/router.middlewares: default-events-redirect@kubernetescrd,default-cli-redirect@kubernetescrd
+        traefik.ingress.kubernetes.io/router.middlewares: 'default-meetings-redirect@kubernetescrd,default-events-redirect@kubernetescrd,default-cli-redirect@kubernetescrd'
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
@@ -38,6 +38,17 @@ spec:
   redirectRegex:
     regex: '^https://www.netsoc.ie/cli/?$'
     replacement: 'https://github.com/netsoc/cli/releases/latest'
+    permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: meetings-redirect
+  namespace: default
+spec:
+  redirectRegex:
+    regex: '^https://www.netsoc.ie/meeting/?$'
+    replacement: 'https://tcd-ie.zoom.us/j/97182874403?pwd=ZW9CSHdEZTVRSWVOMmZsU3hsbVRwdz09'
     permanent: true
 ---
 apiVersion: traefik.containo.us/v1alpha1
