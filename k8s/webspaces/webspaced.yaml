@@ -47,7 +47,7 @@ spec:
       webspaces:
         lxd_profile: default
         instance_prefix: 'ws-'
-        domain: ng.netsoc.ie
+        domain: netsoc.ie
         config_defaults:
           startup_delay: 5
           http_port: 80
@@ -66,7 +66,6 @@ spec:
         default_sans:
         - 'netsoc.ie'
         - '*.netsoc.ie'
-        - '*.ng.netsoc.ie'
       lxd:
         url: 'https://webspaces-lxd8s'
         tls:
@@ -137,3 +136,38 @@ spec:
   valuesFrom:
   - secretKeyRef:
       name: webspaced-secrets
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: ng-redirect
+  namespace: webspaces
+spec:
+  redirectRegex:
+    regex: '^https://(.*).ng.netsoc.ie/(.*)'
+    replacement: 'https://${1}.netsoc.ie/${2}'
+    permanent: false
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ng-redirect
+  namespace: webspaces
+spec:
+  entryPoints: [websecure]
+  routes:
+  - match: HostRegexp(`{user:.+}.ng.netsoc.ie`)
+    kind: Rule
+    services:
+      - name: noop@internal
+        kind: TraefikService
+    middlewares:
+      - name: ng-redirect
+        namespace: webspaces
+  tls:
+    secretName: tls-main
+    domains:
+    - main: '*.ng.netsoc.ie'
+      sans:
+      - 'netsoc.ie'
+      - '*.netsoc.ie'
