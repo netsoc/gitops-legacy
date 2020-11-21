@@ -13,13 +13,11 @@ spec:
       name: letsencrypt-staging-account-key
     solvers:
     - dns01:
-        rfc2136:
-          nameserver: cube.netsoc.ie
-          tsigKeyName: 'staging.netsoc.ie.'
-          tsigAlgorithm: HMACSHA512
-          tsigSecretSecretRef:
-            name: cubedns-tsig
-            key: k8s-staging.key
+        cloudflare:
+          email: jackos1998@gmail.com
+          apiTokenSecretRef:
+            name: cloudflare-api
+            key: api-token
       selector:
         dnsZones: ['staging.netsoc.ie']
     - http01:
@@ -45,13 +43,11 @@ spec:
       name: letsencrypt-account-key
     solvers:
     - dns01:
-        rfc2136:
-          nameserver: cube.netsoc.ie
-          tsigKeyName: 'netsoc.ie.'
-          tsigAlgorithm: HMACSHA512
-          tsigSecretSecretRef:
-            name: cubedns-tsig
-            key: k8s.key
+        cloudflare:
+          email: jackos1998@gmail.com
+          apiTokenSecretRef:
+            name: cloudflare-api
+            key: api-token
       selector:
         dnsZones: ['netsoc.ie']
     - http01:
