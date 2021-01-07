@@ -11,7 +11,7 @@ spec:
   chart:
     repository: https://ananace.gitlab.io/charts/
     name: element-web
-    version: 1.0.5
+    version: 1.0.12
   values:
     image:
       repository: vectorim/riot-web
