@@ -81,7 +81,7 @@ spec:
       size: 64Gi
       storageClass: longhorn-retain
 
-      existingClaim: synapse-medias
+      existingClaim: synapse-media
     volumePermissions:
       enabled: false
 
