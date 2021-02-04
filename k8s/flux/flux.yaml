@@ -11,7 +11,7 @@ spec:
   chart:
     repository: https://charts.fluxcd.io/
     name: flux
-    version: 1.5.0
+    version: 1.6.1
   values:
     additionalArgs: ['--connect=ws://fluxcloud.monitoring']
     git:
