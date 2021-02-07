@@ -15,7 +15,7 @@ spec:
   values:
     image:
       repository: ghcr.io/netsoc/shhd
-      tag: 0.1.2
+      tag: 0.1.3
 
     config:
       iam:
