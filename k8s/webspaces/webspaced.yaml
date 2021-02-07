@@ -6,7 +6,7 @@ metadata:
   namespace: webspaces
   annotations:
     fluxcd.io/automated: 'true'
-    filter.fluxcd.io/chart-image: semver:~0.2
+    filter.fluxcd.io/chart-image: semver:~0.3
 spec:
   chart:
     repository: https://netsoc.github.io/charts/
@@ -15,7 +15,7 @@ spec:
   values:
     image:
       repository: ghcr.io/netsoc/webspaced
-      tag: 0.2.2
+      tag: 0.3.0
 
     global:
       kubelan:
