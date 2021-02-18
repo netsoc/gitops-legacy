@@ -14,7 +14,7 @@ spec:
   values:
     image:
       repository: ghcr.io/netsoc/docs
-      tag: 5ba70fcb9d732ade689643febd4e9e31d7d75b1d
+      tag: d4bc9a38d9441b54af29a772c6991df4ac8e3bcc
     replicaCount: 1
     ingress:
       enabled: true
