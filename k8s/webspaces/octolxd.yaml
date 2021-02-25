@@ -1,0 +1,33 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: webspaced
+  namespace: octolxd
+  annotations:
+    fluxcd.io/automated: 'true'
+    filter.fluxcd.io/chart-image: semver:~0.1
+spec:
+  chart:
+    repository: https://devplayer0.github.io/charts/
+    name: octolxd
+    version: 0.1.0
+  values:
+    image:
+      repository: ghcr.io/devplayer0/octolxd
+      tag: 0.1.0
+
+    ingress:
+      enabled: true
+      tls:
+      - hosts: [octolxd.netsoc.ie]
+        secretName: tls-main
+      hosts:
+      - host: octolxd.netsoc.ie
+        paths: [/]
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+
+    config:
+      log_level: DEBUG
