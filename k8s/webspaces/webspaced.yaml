@@ -15,7 +15,7 @@ spec:
   values:
     image:
       repository: ghcr.io/netsoc/webspaced
-      tag: 0.3.0
+      tag: 0.3.1
 
     global:
       kubelan:
@@ -159,11 +159,11 @@ spec:
   - match: HostRegexp(`{user:.+}.ng.netsoc.ie`)
     kind: Rule
     services:
-      - name: noop@internal
-        kind: TraefikService
+    - name: noop@internal
+      kind: TraefikService
     middlewares:
-      - name: ng-redirect
-        namespace: webspaces
+    - name: ng-redirect
+      namespace: webspaces
   tls:
     secretName: tls-main
     domains:
