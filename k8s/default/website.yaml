@@ -70,7 +70,7 @@ metadata:
 spec:
   redirectRegex:
     regex: '^https://www.netsoc.ie/event/?$'
-    replacement: 'https://tcd-ie.zoom.us/j/8820425304?pwd=OFdSK3M3UWJDRkZ1NXlUbTBicFNodz09'
+    replacement: 'https://tcd-ie.zoom.us/j/91778973809?pwd=K3B0dGtOdlJMRHJEY3RSNjBDSllaZz09'
     permanent: true
 ---
 apiVersion: traefik.containo.us/v1alpha1
