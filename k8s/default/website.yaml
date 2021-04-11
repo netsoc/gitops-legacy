@@ -70,7 +70,7 @@ metadata:
 spec:
   redirectRegex:
     regex: '^https://www.netsoc.ie/agm/?$'
-    replacement: https://tcd-ie.zoom.us/j/92587206850?pwd=WmZ3aDVnV2JhVlFpdkRQTDY5eDdFZz09'
+    replacement: 'https://tcd-ie.zoom.us/j/92587206850?pwd=WmZ3aDVnV2JhVlFpdkRQTDY5eDdFZz09'
     permanent: true
 ---
 apiVersion: traefik.containo.us/v1alpha1
