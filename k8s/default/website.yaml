@@ -27,29 +27,7 @@ spec:
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: 'true'
-        traefik.ingress.kubernetes.io/router.middlewares: 'default-coffee-redirect@kubernetescrd,default-meetings-redirect@kubernetescrd,default-events-redirect@kubernetescrd,default-cli-redirect@kubernetescrd'
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: cli-redirect
-  namespace: default
-spec:
-  redirectRegex:
-    regex: '^https://www.netsoc.ie/cli/?$'
-    replacement: 'https://github.com/netsoc/cli/releases/latest'
-    permanent: true
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: coffee-redirect
-  namespace: default
-spec:
-  redirectRegex:
-    regex: '^https://www.netsoc.ie/coffee/?$'
-    replacement: 'https://tcd-ie.zoom.us/j/95979020138?pwd=OGFyaVFtWUIzejZlVGtyWFpQbnhtUT09'
-    permanent: true
+        traefik.ingress.kubernetes.io/router.middlewares: 'default-meetings-redirect@kubernetescrd,default-events-redirect@kubernetescrd,default-agm-redirect@kubernetescrd,default-cli-redirect@kubernetescrd'
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
@@ -71,6 +49,28 @@ spec:
   redirectRegex:
     regex: '^https://www.netsoc.ie/event/?$'
     replacement: 'https://tcd-ie.zoom.us/j/91778973809?pwd=K3B0dGtOdlJMRHJEY3RSNjBDSllaZz09'
+    permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: cli-redirect
+  namespace: default
+spec:
+  redirectRegex:
+    regex: '^https://www.netsoc.ie/cli/?$'
+    replacement: 'https://github.com/netsoc/cli/releases/latest'
+    permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: agm-redirect
+  namespace: default
+spec:
+  redirectRegex:
+    regex: '^https://www.netsoc.ie/agm/?$'
+    replacement: https://tcd-ie.zoom.us/j/92587206850?pwd=WmZ3aDVnV2JhVlFpdkRQTDY5eDdFZz09'
     permanent: true
 ---
 apiVersion: traefik.containo.us/v1alpha1
