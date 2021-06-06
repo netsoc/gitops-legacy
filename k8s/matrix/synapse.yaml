@@ -62,13 +62,6 @@ spec:
                 profile:
                   name: false
 
-    synapse:
-      extraCommands:
-        - apt-get update -qyy && apt-get install curl unzip -yqq
-        - curl -Lo /tmp/rest-provider.zip https://github.com/devplayer0/matrix-synapse-rest-password-provider/archive/master.zip
-        - cd /tmp && unzip rest-provider.zip
-        - cd /tmp/matrix-synapse-rest-password-provider-master && python setup.py install
-
     postgresql:
       enabled: true
       persistence:
