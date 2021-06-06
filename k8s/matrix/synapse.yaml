@@ -16,7 +16,7 @@ spec:
     # TODO: Figure out why ananace/matrix-synapse gives invalid tar header: unknown
     image:
       repository: devplayer0/synapse
-      tag: 1.24.0-2
+      tag: 1.24.0-3
 
     signingkey:
       job:
