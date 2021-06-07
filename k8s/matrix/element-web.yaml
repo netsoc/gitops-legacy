@@ -15,7 +15,7 @@ spec:
   values:
     image:
       repository: vectorim/riot-web
-      tag: v1.7.29
+      tag: v1.7.30
 
     extraVolumes:
     - name: overlay
